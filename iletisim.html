@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İletişim | Güncel Büro Makineleri</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --mor: #7B2D8B;
+      --mor2: #9B3DAB;
+      --turuncu: #E86A1A;
+      --turuncu2: #F07C30;
+      --bg: #FAFAFA;
+      --bg2: #F4F1F8;
+      --text: #1a1a2e;
+      --text2: #4a4a6a;
+      --border: rgba(123,45,139,0.12);
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Nunito", sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 2px 16px rgba(123,45,139,0.08);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.7rem 2rem;
+    }
+    .nav-logo img { height: 56px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-family: "Nunito", sans-serif;
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--text2); text-decoration: none;
+      padding: 0.5rem 1.1rem; border-radius: 6px;
+      transition: all 0.25s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--mor); background: var(--bg2); }
+    .nav-links a.cta { background: var(--turuncu); color: white; }
+    .nav-links a.cta:hover { background: var(--turuncu2); color: white; }
+
+    footer { background: #1a0a24; color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 1.5rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 2.5rem; margin-bottom: 2.5rem;
+    }
+    .footer-logo img { height: 52px; margin-bottom: 1rem; filter: brightness(0) invert(1); }
+    .footer-desc { font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.55); margin-top: 0.5rem; }
+    .footer-col h4 {
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--turuncu); margin-bottom: 1rem; font-weight: 700;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--turuncu); }
+    .footer-contact-item { display: flex; gap: 0.7rem; margin-bottom: 0.8rem; align-items: flex-start; }
+    .footer-contact-item .icon { font-size: 1rem; margin-top: 0.1rem; flex-shrink: 0; }
+    .footer-contact-item span { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: rgba(255,255,255,0.3);
+    }
+    .footer-bottom span { color: var(--turuncu); }
+
+    .wa-btn {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366; box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: all 0.3s;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+    .wa-btn:hover { transform: scale(1.1); }
+    .wa-btn svg { width: 30px; height: 30px; fill: white; }
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 36px rgba(37,211,102,0.65); }
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--turuncu); background: rgba(232,106,26,0.09);
+      padding: 0.35rem 0.9rem; border-radius: 20px; margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700;
+      color: var(--mor); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-subtitle { font-size: 1rem; color: var(--text2); line-height: 1.8; max-width: 580px; }
+    .divider { width: 48px; height: 3px; background: linear-gradient(90deg, var(--turuncu), var(--mor)); border-radius: 2px; margin: 0.8rem 0 1.5rem; }
+
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .nav-links a { font-size: 0.78rem; padding: 0.4rem 0.55rem; }
+    }
+    @media (max-width: 500px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a0a24, #3a1055);
+    padding: 5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(232,106,26,0.15) 0%, transparent 60%);
+  }
+  .page-hero-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+  .page-hero h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem,4vw,3.2rem); color: white; margin-bottom: 1rem; animation: fadeDown 0.7s ease both; }
+  .page-hero p { color: rgba(255,255,255,0.65); font-size: 1.05rem; animation: fadeDown 0.7s 0.2s ease both; }
+  .breadcrumb { display: flex; gap: 0.5rem; justify-content: center; align-items: center; margin-bottom: 1rem; font-size: 0.8rem; animation: fadeDown 0.7s 0.1s ease both; }
+  .breadcrumb a { color: var(--turuncu); text-decoration: none; }
+  .breadcrumb span { color: rgba(255,255,255,0.4); }
+  .breadcrumb .current { color: rgba(255,255,255,0.7); }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+
+  /* WHATSAPP DESTEK */
+  .wa-section { padding: 3rem 2rem; background: #f0fdf4; border-bottom: 1px solid #bbf7d0; }
+  .wa-inner { max-width: 900px; margin: 0 auto; }
+  .wa-box {
+    background: white; border: 2px solid #25D366;
+    border-radius: 16px; padding: 2rem 2.5rem;
+    display: flex; align-items: center; gap: 2rem;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.12);
+    transition: all 0.3s;
+  }
+  .wa-box:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.2); }
+  .wa-icon-big {
+    width: 72px; height: 72px; flex-shrink: 0;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wa-icon-big svg { width: 38px; height: 38px; fill: white; }
+  .wa-text h3 { font-family: "Playfair Display", serif; font-size: 1.3rem; color: #15803d; margin-bottom: 0.3rem; }
+  .wa-text p { font-size: 0.88rem; color: #4b7a5a; margin-bottom: 0.8rem; }
+  .wa-num { font-size: 1.5rem; font-weight: 800; color: #15803d; letter-spacing: 0.02em; }
+  .wa-cta {
+    margin-left: auto; flex-shrink: 0;
+    background: #25D366; color: white;
+    padding: 0.85rem 2rem; border-radius: 10px;
+    text-decoration: none; font-weight: 700;
+    transition: all 0.3s; white-space: nowrap;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .wa-cta:hover { background: #1eab54; transform: scale(1.03); }
+
+  /* CONTACT GRID */
+  .contact-section { padding: 5rem 2rem; background: var(--bg); }
+  .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+
+  .contact-info { }
+  .contact-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.8rem; margin-bottom: 1.2rem;
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    transition: all 0.3s;
+  }
+  .contact-card:hover { border-color: rgba(123,45,139,0.25); box-shadow: 0 4px 20px rgba(123,45,139,0.08); }
+  .contact-card-icon {
+    width: 48px; height: 48px; flex-shrink: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(232,106,26,0.1), rgba(123,45,139,0.1));
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .contact-card-text h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--turuncu); margin-bottom: 0.3rem; }
+  .contact-card-text p { font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+  .contact-card-text a { color: var(--mor); text-decoration: none; font-weight: 600; }
+  .contact-card-text a:hover { color: var(--turuncu); }
+
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+  .hours-row { display: flex; justify-content: space-between; font-size: 0.82rem; }
+  .hours-row .day { color: var(--text2); }
+  .hours-row .time { color: var(--mor); font-weight: 600; }
+
+  /* FORM */
+  .contact-form-wrap {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2.5rem;
+    box-shadow: 0 4px 24px rgba(123,45,139,0.06);
+  }
+  .contact-form-wrap h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem; color: var(--mor); margin-bottom: 0.5rem;
+  }
+  .contact-form-wrap p { font-size: 0.88rem; color: var(--text2); margin-bottom: 1.8rem; }
+
+  .form-group { margin-bottom: 1.3rem; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text2); margin-bottom: 0.45rem; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: "Nunito", sans-serif; font-size: 0.9rem; color: var(--text);
+    background: var(--bg); transition: border-color 0.25s, box-shadow 0.25s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--mor); box-shadow: 0 0 0 3px rgba(123,45,139,0.08);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .btn-submit {
+    width: 100%; padding: 0.95rem;
+    background: linear-gradient(135deg, var(--turuncu), #c85a12);
+    color: white; border: none; border-radius: 8px;
+    font-family: "Nunito", sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(232,106,26,0.35);
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,106,26,0.45); }
+
+  /* MAP PLACEHOLDER */
+  .map-section { padding: 0 2rem 5rem; background: var(--bg); }
+  .map-inner { max-width: 1200px; margin: 0 auto; }
+  .map-wrap {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(123,45,139,0.08);
+  }
+  .map-wrap iframe { width: 100%; height: 420px; border: none; display: block; }
+
+  @media (max-width: 768px) {
+    .wa-box { flex-direction: column; text-align: center; }
+    .wa-cta { margin-left: 0; width: 100%; justify-content: center; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo.PNG" alt="Güncel Büro Makineleri"></a>
+    <ul class="nav-links">
+      <li><a href="index.html" id="nav-home">Ana Sayfa</a></li>
+      <li><a href="hakkimizda2.html" id="nav-about">Hakkımızda</a></li>
+      <li><a href="urunlerimiz.html" id="nav-products">Ürünlerimiz</a></li>
+      <li><a href="iletisim.html" id="nav-contact" class="active">İletişim</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Ana Sayfa</a>
+      <span>/</span>
+      <span class="current">İletişim</span>
+    </div>
+    <h1>İletişim</h1>
+    <p>Sipariş, teklif veya bilgi için bize ulaşın — hızlıca geri dönelim.</p>
+  </div>
+</div>
+
+<!-- WHATSAPP DESTEK HATTI -->
+<section class="wa-section">
+  <div class="wa-inner">
+    <a href="https://wa.me/905309392722" target="_blank" class="wa-box" style="text-decoration:none">
+      <div class="wa-icon-big">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div class="wa-text">
+        <h3>WhatsApp Destek Hattı</h3>
+        <p>7/24 hızlı yanıt · Sipariş, fiyat teklifi ve bilgi için</p>
+        <div class="wa-num">0530 939 27 22</div>
+      </div>
+      <div class="wa-cta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp'tan Yaz
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT INFO + FORM -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-info fade-up">
+      <span class="section-tag">Bize Ulaşın</span>
+      <h2 class="section-title">İletişim<br>Bilgilerimiz</h2>
+      <div class="divider"></div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-text">
+          <h4>Adres</h4>
+          <p>Osmanlı Caddesi No: 30/B<br>Nasuh Akar Mahallesi<br>Çankaya / Ankara</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-text">
+          <h4>Telefon</h4>
+          <p><a href="tel:+905309392722">0530 939 27 22</a></p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">✉️</div>
+        <div class="contact-card-text">
+          <h4>E-Posta</h4>
+          <p><a href="mailto:guncel.kirtasiye@hotmail.com">guncel.kirtasiye@hotmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">🕐</div>
+        <div class="contact-card-text">
+          <h4>Çalışma Saatleri</h4>
+          <div class="hours-grid">
+            <div class="hours-row"><span class="day">Pazartesi – Cuma</span><span class="time">08:30 – 18:30</span></div>
+            <div class="hours-row"><span class="day">Cumartesi</span><span class="time">09:00 – 17:00</span></div>
+            <div class="hours-row"><span class="day">Pazar</span><span class="time" style="color:#e55;">Kapalı</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+<form class="contact-form-wrap fade-up"
+      style="transition-delay:0.15s"
+      action="https://formspree.io/f/xyknrwwo"
+      method="POST">
+
+  <h3>Bize Mesaj Gönderin</h3>
+  <p>Fiyat teklifi, sipariş veya bilgi almak için formu doldurun, en kısa sürede dönelim.</p>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Ad Soyad *</label>
+      <input type="text" name="ad" placeholder="Adınız Soyadınız" required>
+    </div>
+    <div class="form-group">
+      <label>Firma Adı</label>
+      <input type="text" name="firma" placeholder="Firma / Kurum Adı">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Telefon *</label>
+      <input type="tel" name="telefon" placeholder="05__ ___ __ __" required>
+    </div>
+    <div class="form-group">
+      <label>E-Posta</label>
+      <input type="email" name="email" placeholder="mail@firma.com">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Konu</label>
+    <select name="konu">
+      <option>Fiyat Teklifi</option>
+      <option>Ürün Bilgisi</option>
+      <option>Teknik Servis</option>
+      <option>Toplu Sipariş</option>
+      <option>Diğer</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Mesajınız *</label>
+    <textarea name="message" placeholder="Ürün adı, miktar veya talebinizi kısaca açıklayın..." required></textarea>
+  </div>
+
+  <button type="submit" class="btn-submit">✉️ Mesajı Gönder</button>
+
+</form>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-wrap fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.8!2d32.8597!3d39.9078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zT3NtYW5sxLEgQ2FkZGVzaSBObyUzQTMwJTJGQiwgTmFzdWggQWthciBNYWhhbGxlc2ksIMOHYW5rYXlhLCBBbmthcmE!5e0!3m2!1str!2str!4v1700000000000"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Güncel Büro Makineleri Konum">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAN2BIkDASIAAhEBAxEB/8QAHQABAAIDAQEBAQAAAAAAAAAAAAcJBAYIBQMCAf/EAFQQAQABAwMBAwcHBwgECwkAAAABAgMEBQYRBxIhMRMYQVFUlNMIFCJhcYGyFTI3QnWRoRZSVWJ0scHRIzM2wxc0NThyc4KzwtLhJUNjdpOVorTw/8QAGwEBAAIDAQEAAAAAAAAAAAAAAAQGAQMFAgf/xAA2EQEAAgECAwQIBAYDAQAAAAAAAQIDBBEFITESQVFxBhMiM2GRodGBscHhFCMyNELxFXLwUv/aAAwDAQACEQMRAD8A7LAAAAAAAAAAAAAAAAB5OdufbeDXNGbuDSseuOfo3cy3TV+6Z5ZiJno9Vra3KI3esPFwt2bWza6aMTcekXq6vCijMtzV+7nl7UTExExPMT4STEx1LUtX+qNgBh5AAAAAAAAAAAAAAAAAAAAAAAAFVXylf0/b4/bN/wDEtVVVfKV/T9vj9s3/AMQI8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABcwAAAAAAAAAAAACNepHVvR9szd0/S4o1TVaeaZppq/wBFZq/r1R4z/Vj75h6rS152huw4Mme3ZxxvKQNV1HA0rBuZ2pZdnExrf51y7XFMR9X2/Uh3efXbHsXK8XauBTlTHd87yommj/s0d0z9szH2Ib3VuXWtz6jOdrObcyK/1KPCi3Hqpp8Ij/8ApeOnY9LWOduayaXgmOntZuc+Hd+7YNzbz3PuOuqdW1jJvW6v/c01di1Ef9CniP397XwSoiI5Q7VKVpG1Y2gbv0v6h6ns7UqKbty9l6TcmKb+LNfPZj+db58Ko9XhPhPomNIC1YtG0vOXFTNSaXjeJds6Bq+na7pNjVNLyaMjFvRzTVT6J9MTHomPTEs9yN0x33qOytW8pb7WRp16Y+dYs1d1X9an1VR/Hwn6uqNta3pu4tHs6rpWRF/Gux9lVE+mmqPRMepy82Gcc/BTdfw++kt41npP3eiA0ueAAAAAAAAAAAAAAAAAAAAAAKqvlK/p+3x+2b/4lqqqr5Sv6ft8ftm/+IEeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuYAAAAAAAAaH1d3nmbKp0bOsWaMjHvZFVvJsz3TXR2efoz6Jj9zfEQfKmpj+SWlVcR2oz+Injv/wBXV/k2YYi14iUzQY65NRWl43ifskzbGvaXuTSLWqaRk038e53T6KqKvTTVHomPV/gytU1DC0vAvZ+o5VrFxbNPauXblXERH+f1elyHsHeOrbO1eM3Trk12a+IyMWqqfJ3qfr9Ux6J9H2cxP36hb61reef5TOueRw7dXNjDtzPYt/XP86r65+7iO5InST2uvJ1J4Ff120T7Hj3+Tb+qHWDO1vyulbbqu4OmzzTXf8L1+P8AwU/VHfPp9MImBNpStI2hYNPp8enp2McbAD03AMrS9PztUzreDp2Jeysm7PFFq1RNVU/+n1hMxEbyxWbpGlanrGXGLpeBk5t+f1LNua5iPXPHhH1ymnYfQyjydvM3fkVTVPExg49fER9Vdcf3U/vTNo2labo2DThaVg2MPHp8KLVEUxM+ufXP1z3ouTVVryrzcXVcaxY/ZxR2p+jnHRuiO882imvM+YabTPjTevdqv91ETH8Yb1sbp5vXYufVmaVq+nahj3P+M4Nyqu3TeiPVPExFUeif39zO6/ahVbx9L0+1dqpmquu9XETMeERTTP8AGpGOl63q2l5EX8DUcmxXE/q3J4n6pjwmPqlSOKemldFq7aa2PeI23mJ8Y36bfqmabQ6viOljLN4iLb+zNeXXx33dO2K6rlmiuu1XaqqpiZt1TEzTPqniZjn7Jl+2udPNxfyl25bzbtNNOVbqm1kU0+HaiI74+qYmJ/f6mxrBptRj1OKubHO9bRvCm58N8GS2O8bTEgDc0gAAAAAAAAAAAAAAAAAAACqr5Sv6ft8ftm/+Jaqqq+Ur+n7fH7Zv/iBHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALmAAAAAAAAEQ/Kl/2Q0v8At/8Au60vIh+VL/shpf8Ab/8Ad1tuD3kJ3DP7qnm51AdZeAAAI754hNXSfo9cy/Jazu6zXax+6qzgT3V3PrueqP6vjPp48J8XyVpG8o+p1WPTU7WSf3aZ036ba3vG7TkU0zhaVFXFeXcp/O48Yoj9af4R6/Q6U2btLQ9p6fGJo+JFEzEeVv18Tduz66qv8PCPRD2rFm1j2KLFi1RatW6YpooopimmmI7oiIjwh+3Ny57ZPJUdbxHLqp2nlXw+4DB3BqVrSNEy9TvcdjHtTXxP60+iPvniPvRsl646Te07RHOUGlLXtFa9ZQf1h1P8o72yLVNXNvDpjHp+2O+r/wDKZj7mmvplX7mTk3cm9VNV27XNddU+mZnmZfN8J1upnVai+af8pmX2HSaeNPgpij/GIhMfyf4q/JOqTM/Rm/RxH19nv/wSa03o3g/Mti41c8drKuV35++ezH8KYbk+w8Awzh4bhrPhv8+f6vl/GssZdfltHjt8uX6ADsOYAAAAAAAAAAAAAAAAAAAAKqvlK/p+3x+2b/4lqqqr5Sv6ft8ftm/+IEeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuYAAAAAAAARD8qX/ZDS/wC3/wC7rS8iH5Uv+yGl/wBv/wB3W24PeQncM/uqebnUB1l4AAT58n7YeiXNNsbszMixqOXNU+Rs099GLVH86J8a/Ce/w7pjnulNjkHprvbUdla187xo8th3uKcrGmeIuUx6Y9VUd/Eurdta3pu4tHs6rpWRF/Gux9lVE+mmqPRMepzdTS0W3noqPGMGamX1l53rPT4fD/3V6ICM44ijrtr8dmxt2xVzPMX8mYnw/m0/4/uSPuLVsXRNHyNTy5/0dmnmKeeJrq9FMfXM9zmrWNQyNV1TJ1HKq7V7IuTXV6o9UR9UR3fcpvphxSNPp/4Wk+1fr8K/v0+a0+jHD5zZ/wCItHs16ef7fZiMjTcS7n6hj4NimZu37tNuiPrmeGOkbodoM5mtXNbv0c2MKOza5juquzH+ETz9sw+ecM0VtdqqYK988/Lv+i7a/V10mnvmnujl5931TFpuJawNOx8GxHFrHtU26fsiOGQD7nWsViKx0h8htabTMz1AHpgAAAAAAAAAAAAAAAAAAAAVVfKV/T9vj9s3/wAS1VVV8pX9P2+P2zf/ABAjwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFzAAAAAwtX1fStIsxe1XUsTBtz+bVkXqaIq+zme94VfUbY9NU0zubT+Y7u6uZj98Q9RW09IbK4cl43rWZ/BtQ1/SN7bU1fUbWnabrmJlZd3nydqiZ7VXETVPo9UTP3P7qm9NraXqlemahreLj5luaYqs1zPaiaoiY9HpiY/edi2+2zPqMu/Z7M7+TOs69od61du2tZ065bsxFV2qnKomKImeImZ57o59b6W69J1rFi5bqwtRsU1cRVTNN2iKv4xz3/AMUWaB0aydL0TXNOq16zdnVMeizTXGNMeT7NyK+Zjtd/hw9vZk7f6XaN/JzXdy4fzm5cqy6e1RNHNFXFMd3f6aJbJpX/ABneUrJp8O0+pvNp35RtPTxbv+RtH/orA93o/wAj8jaP/RWB7vR/k/Ooa3pOBo9OsZmdas4FVNFUX6p+jMVcdmfv5hh6Fu7bWu5lWHpGs4uZkU0Tcm3bq7+zExEz3/bDXtbbdGiuWYm0b7R5s78jaP8A0Vge70f5H5G0f+isD3ej/J98/LxsDCvZuZeps49iia7tyrwppjxmXm6Dunb+v3rtnRtVx825apiq5TbmZmmJ7uT2tt3mPWTWbRvtDL/I2j/0Vge70f5MjFxcXEomjFxrNimZ5mm3RFMTPr7n9yMi1j2ar2Rdt2bVMc1V11RTTH2zLxbu89r26uzVruDM/wBW52o/fCPl1WLD7y8R5zEPWPFmzR7FZnyiZe+PI0rcuiarlTi6dqWPk3opmvsUTPPEen+L7bhjGu6RkWMzUKtPsXaexXfpuU25pifHiqqJiOYYjUY745yY5i0R4TG3zYnDet4peJifKfyQ51d3ZGt6nGmYNznT8Sqeaonuu3PCavsjwj759LQ0nXNr9M7dXZq3VkzP9XIt1R/Chl6RsTYWr367Gm69n5VyintVU0XqOYjnjn/Vvl2r4RruI6m2S16Ta3dF4+UeT6HpuJ6PQ6eKVpaKx39mfnKLtOw8jPzrGFi25uX79cUUUx6Zl0ntPRbG39BxtMsTFU26eblf8+ue+qr9/wDDhqOzNI2Pom5OzpurV5Wp/Ss0W71yKpon9biIpjv4iY/ekHtStHorwaujrfNe0WvPLlO+0eHnP2V30i4rOqtXFSJisc+cbbz9n6H57Uv0uCsg0rH6sdNr+tRotveui/lCb848WKsmKavKc9nsd/dzz3cettOt6pp+i6VkarquVRi4WNR2716vniiPDmeAZgw9I1TA1bHu5GnZVGTatZF3Grqp54pu2q5ouU9/piqmY+5mAAAA8zc+4NE2xpVWq7g1PG03Bprpoqv36+zRFVU8RHP1yD0xj5+dh4Gm39Szcm1Yw8e1VevX66oiii3THM1TPqiI55fPRdU0/WtKxtV0rLtZmDlURcsX7U803KZ9MSDMBhYWrabm6pn6Xi5tm9m6dNuMyzTPNVmblPao7UejmnvgGaPO3BrmkaBiWsvWtQsYNi7fox7dy9VxFVyueKaY+uZeiAAAMKdW02Ndp0Kc2zGp1Ys5dONz9ObMVRRNfHq7UxH3s0AAAABVV8pX9P2+P2zf/EtVVVfKV/T9vj9s3/xAjwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFzAADzN16va0Dbeoazep7VOJYquRT/Oq4+jT988R9702j9eIrnpPrfY554s+Hq8vb5/hy9Uje0Q3aekZMtaT0mYj6oE2zpWudUt83KczUJi7XTN/IyK6Zqi1biYjimn7ZiIp7kqU9A9u9mO1rWqzVx3zHk4j8LX/kq1W41nXKZ/1s49qafsiqef74ffdG0+sGTubVMjTNU1OjBu5l6vGpo1iaKYtTXM0RFPb7o447vQm5LW7fZi20QsWqzZP4icNMkUrWIbjs3pFou19yYmu4mp6hev43b7NF3sdme1RVRPPFMT4VSh/rX+mnUv8ArcX/ALm09HovuPcuZ1T0vT9S1/VsqxM36blm9m3LlFUxZuT3xMzE8TET9zz+tsTHWjUZmOIm7jTEz/1NtnHW1cvtTvyetNjy49ZMZbdqex+rqZzd8qL/AG/wf2Vb/wC9uukXN3yoZieoGFETE8aXbifq/wBLdaNL7xy+C/3UeUt66p/833F/suD/AOBA+2NQ1PbmpYG5sKiqKbGTNNNX6tcxETXbn7aauPslPPVWmafk/wCNTVExVGLhRMTHfH5jUuke17O7ukevaVXFNOR8/wDK4tyf1LtNuns/dPfE/VMt2K0VxzM9N3R0WauLS2tfpNpifKdkp7t1LF3B0h1bVdOr7ePk6Teu0cz3xEUTMxP1xxMTHrhFfyWf+X9Z/stH43ldN9z3tL2zuzZOrdq15TTsyrHpud0271NquK7f38c/bTPrer8ln/l/Wf7LR+NiadjHeGu+mnTaXPTu5THk+m99Z1Ddu750/Grqqx4yPm+JZieKeeez2p+3x59ENyxOkWmxj0Rl6rl13uPpTapppp5+qJiZaJ0x7uoGmRd5ifK188+PPYq/xdDPmPo7w/BxaMur1le3abbc9+XKJ/Xb8HQ47rc3DZx6bSz2axXfl3936fVqG0th6btnVKtSxs3Ku1+SqtzF2aezETMTz3RHqRZrOoanvveNGLZuVTbvXpoxbVU8UWqI/WmPXxHMz4/whPGr8/knM7PPa8hXxx4/my5u2zi6rma1Yx9Fu3LWfVFXkqrd7ydXdTMzxVzHHdyx6TYqaWNPo8FZjHaZma16zzjl5/qz6P5L6n12qzW3vWIiJnu6pRx+kOlxaiMjVsyu5x3zbpppj908/wB7YNm7I0/bGdey8TLyr1d215OYu9niI5ifREepoX8muqX9I6h/90n/AMzaum2k7w0/Vcm7uPKyr2PVY7NuLuZ5aIr7UejmeO7nvTOGU01dTTsaG1J/+p35IuvvnnBftayt48I25tF2n+mGn+35H/jTugjakxHWCmZmI/8AaF+O/wD7ad0j0Q/t83/efyhp9J/fYv8ApH5yP2/D9rarUOIsvMvY/SjcNeoa7tm/omPum9eyNCns2tUyIpzKZ4tXZmqaeZiJ7qOezFXe6Y6x7gzdHt7Fy8TOu6dj5u6cPHzZqqiiKrFy1e5or58ImqKOfr4eRRqnQ/F29n9Qp21t3Es4Go3ca5lzotqnIry6K+Jijijt1VzV4THfPfPrlIuZgaPu7bVFjWtFoytPzbdFyrD1HGiZjwqp7dFXPZqju7p74n1SDUem24sjWuqXUfDp1WM7TdOysC1h0UXIrt2ZqxYm7TTMent9rn64l5fSO1re4d0bi3Bqm7NauWdH3NqenYumU3KKcSbNNcxT5Sns9quae13TNXERTHEePO92cDaex9EztRxdN0vQtPx7Hlcu5jYtNqmLdqmeJq7EczFNPPHiz9Cx9Jt4U5ejYmLj4+fXObVVYsxb8vXciKpu1RERzVV3TMz3z6RlCu9dU1DV979Qbef1D1LaVvauJYuaVjYmRbs0XO1j+Vm/diqJ8tTNf0Oz4Rxx4yljpnq2oa90727rerWYs5+fptjIyaIp7MRXXbiZ4j0RMzzx6OX03Ds3aW4s7Gz9f21pGqZWN3Wb2Xh0Xa6I554iaonu57+PDlka5ruHouVpeLkY+bcq1HJjFszj41VymiqY5ia5pjiin+tPcD1UR/KxxMfUOluNgZdE14+Trmn2btMTxzRVfpiY5+yZS4xNU0zTdVxqcbVNPxM6xTcpu028mzTcpiumeaaoiqJjmJ74n0SDm3Lzdd1fbd7oPqNWVVlaDN6rWM7iY8vpGPRFzGntfzr3atW54nnii5z4t96V6xhaB8k/SNZ1HLysPFxNvzcuX8WmJvW44qiJtxVEx2+Zjjnu5457krVabp1WVkZdWBi1ZGTZpsZF2bNM13bVPa4oqnjmqmO1VxE930p9cvlRoujUaFOg29JwaNJmzNj5jTj0xY8nMcTR5OI7PZ4nw44BDfRPWdwWurepbb1DM16rT7+37Op2cbWdVtZ1+iub00duKrfdRE0zHNHM8ePphrO8Ny6ronWve+m2M67oGkatqmk42p7iopir8nUfMo7NMRPMUVXJ+hFyqOzR4z3zCe9ubL2jtu7Te0DbOj6Xdptzbi5i4dFuvszMTMdqI5mJmIn7oa91K3HsTaeXawdf2/Vn5W6orouY+Jo/zu5nxYop5i7TTTM3Ipoqjjtc8RE+iBh8OuGZlaRszQ50/KuUzOv6Xjzcqq7dVdurIopqiZnnnmJnmfHvfHrRkazXubYehaVr+oaLa1fVb2PmXsKaYuVWoxrlfZiaomIn6PdPHMT3x3xD7YO+Onus7GjPxNKu5ul6VnWcOdOjRq5u4WRRNPk4+bzTzR2OaZiYjin0T3NmsaltzXN4ZujVYtnJ1fbfkL9Vd7GiZxpyKK+xVbrmO6ZppriZj0Tx6RlqvRPP1GzO89C1XWc7VbGga5cxsXLz7nlL/kJs2rkU118R2uzNdXfPfx9iO9h7t1XJ6t7Ly9O1bdF3b26Pyhx+WtTsXqcqi3aqrort2KO+xEVU8RzxMxPEx4ugbeHpul052bjYFixXkVTkZdWPYiK79cUxHaq7Mc11cUxHM8z3RDVtg7Z6e5GBh7m29srTdMrv3KsmzXXpNONkW6/pUzMxNMVUTxNX3T9YPJv/APOmw/8A5Iv/AP71lHnygt4ang6huXVNq6vui1lbZqxKcqujU7FjTrFyvsVRb8hMdu/NVNX0ueYjnunumHQ06dp86rGrTg4s6hTYnHjK8lT5aLU1RVNvt8c9ntRE9nnjmIl4ur7D2Tq+r3tX1XaWh5+oX7XkruTkYNu5crp47PEzMcz3d32dwNd676prGn6Jtu3oWrX9Mv6luXA0+vJsRTVVTavVzRVxFUTE+PMcxMcxD5dTLep7H6A7iq03cWsZmoYGBeu2NSzb8XMrtTVNUTNUREd3PEd3hEN/zNL0zNs41nM07EybeLeov49F2zTXTZuUd9FdETH0aqfRMd8eh+9SwcLU8C9p+pYePm4d+maL2PkWouW7lM+MVU1RMTH1SBpldVzTcW5XVNVdVmiqqZ9MzTDIfyimmiimiimKaaY4iIjiIj1P6Aqq+Ur+n7fH7Zv/AIlqqqr5Sv6ft8ftm/8AiBHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALmAAGDr+mWNZ0PN0nJ7rWXYrs1TxzNPajjmPrjx+5nBE7MxM1neHJlNvdnSneHzmcaLd2jtW6bldE1WMm3Poie7mJ4ifGJiYbrZ+UBqEW4i9tvFrr9M05NVMT93Zn+9Pl23bu09i5RTXT6qo5hh/kbR/wCisD3ej/JJnPS/9debr34lgz7Tnxbz477OY+hdzy3WHSbsxx26sirj1c2LjaPlIbR1P8v/AMqMPFu5GFes00ZNVuJqmzXTHHNUeimaYjv8Ofu5nfH0zTce9Tex9PxLNyn82uizTTVHo8Yhlk6j24vEGTi0zqYz0r0jbZAuh9e7uPpVqxqugzlZluiKar1rJ7EXZj0zE0zxM+nx72lZFO4urG+6sqxhTR5SaLdU0RM2sS1Hh2qp++frnniPQ6dv7f0HIu1Xb+iabduVTzVXXi0VTP2zMM7HsWce1FnHs27NunwoopimI+6CM9K8615leI4MMzfDi2tPxR718s0Y3SPLx7UTFu1Vj0U8+qK6Yh4PyV6qp27rNPM9mMuiYj65o/8ASEwZFixk2ptZFm3etz40XKYqiful+cTExcSmqnFxrOPTVPNUWrcUxP7muMn8uaItdZEaW2DbrO+/yQD8pPaE4Oq2914NuYx8yYtZcUx3UXYjuq+yqI/fH1nyWf8Al/Wf7LR+N0BlWse/Yqt5Vq1cs+NVNymJp7u/vie5F26uoem6Nm1Yu1NO0+5XTPF7Im1xbq+qnszE1fbzx6uUTX8Z0+g0++onbw8Z8odLR5NRrtPOkx03nx7oj4te6hbb1PbW5ata063c+Z1X/nFm9RHMWa+eezV6uJ8Oe6Y+96eN1e1Cm1EZGjY1y56aqLtVET90xP8Aew/+FrcfsWk//Suf+d9tF3lubXs+MXT9taHlXp76p+aVcUx66pmviI+181prNPj1Fp4dqLU7c/09jtc/h/pYbaXPfBWNdhrbsR/V2tuXx/22rYe/725tbq025plvGpizVc7cXpq8JiOOOI9bQN06Dq+ydzRqeBRXGLRe8pi5FNPNMRP6lX3cx3+MJr0HAvY+JRcz7GnUZsx9OcOx2KIj1RzMzP2932PSmmJjie+FqzcDy67S0jU5Z9ZWd4ttETHTltH3V3FxbHo9TacGOPVzG0133ifjvKH7PV/Ni3EXtFx66/TNN6aYn7uJ/vbR0+3zd3TqeRh3NOoxYtWfK9qm7NXP0ojjwj1tur03T66pqrwcaqqfGZtUzP8Ac+mPhYmPVNWPjWbVUxxM0W4pmY+5v0nD+J4s1bZdV2qx1jsxG/4tOp1nD8mK1cen7Np6T2pnb8EIb+0fVdr7zr17EtVTj3Mn5zZvRTzRTVM9qaKvV38xx6YezY6w3YtxF/QKK6/TNGVNMfummf70t1UU1UzTVHMT4xLGq0zTqqpqqwcWZnxmbNP+SLHAdVpst76HUditp3mJrE8/x+yR/wAzp8+KldXg7c1jbeJmPyeZsrX/AOUmh06n80+a9q5VR5Pynb8PTzxH9z3nzsY9mxb8nYtUWqPHs0UxEfwfRY9PTJTFWuW3atEc56bz47OFmtS2S1sddq90ddnGe1NO1fRLVnqlewbm5dtbf3Nqfz3R+OasKZvf8etUx3V1Uxxz2uez2eY4/Opmy5uTB3F1k21qmg6p880nN2jqF+1XauT2K5i9ZiJmPRVHfExPfE8x3JgG5rc0aHsnStT+Sbnblv2dR1LX8/atdV2/dzr9yqubVFc2qYp7XERT2YiIiO/jv55nn76prfTnE6NbY03R7emajpuqajas5F/N1nIsYGNlRixXXORdiZniKeI8l+b2pjwmHSD4/NcXyEWPm1nyMTzFvsR2Ynnnnjw8e8HKuj38XP6EZWmZu8NJ0rDwt7X7GPTm5OTGn5VimKrlGJVdiYuU2KqZmumqZ/Vp8eWwbX1yxn7a6aTo2nV6PhUb4u4fk8fPu5GNkU02b/Ndm5c4qrs1Vd8RMcRxMeh0bds2btqq1dtW7luv86mqmJifth+qKaaKIoopimmmOIiI4iIBAum6brtHVWOlPlsmvb+BqX8qacny0zMYVUzNvDq7+eIyu1PE+NFDTq7t+91O1jI13eOkbf3Th7rmrEnOyMinLqwouRFmxZtxPk67Fy33cRTPM1TM97pzB0TSsHWdR1nFw6Leoal5KMy/zM1XYt0zTRE8z3RETPERxHfPrZldixXeovV2bdVyj8yuaYmqn7J9Aw1rq1oObuTp1rOlaZkXcfUqsebuDdtVzTVTkW5iu13x6JqpiJ+qZQpl6xurdPRbfHU7TPyjhZOtfNcbEs2pr8pi4NiqijJqoiO+JmqcmZmO/imJjviHSj+UU00UxTRTFNMeERHEDKFfk6xpNrcGuRt7du39R0vIxbF2NK0nIv3reJciaom7zdmZomuOImOeZmnmYeX8qPPw9M6mdLs3UN0X9rY1uvVe3qti3TXXj849uI4iqmqJ7UzFHhP533p7sWLFiKos2bdrtT2quxTEcz654fQHJmjatkV9K97XtOz8jUsGd36bcx9xzauWLuqzcybEXJqieI+jERR9GKaZj0ePO67vxdw526+tuJtW7ctavd0zRKbE2rsWrlUdm926aK5/Nrqo7VMT65hPzE1rTNP1rSsnStVw7OZg5VE279i7T2qK6Z9EwCA+nVvScHrbbwdtbf3Ht3Tv5IZV67hapVdp5veXsx5SLdddUxPHdNfERVMd0zxMtS1O9g5PRzpjna7uXRp8hpN+/c0jXs3Ix7Oo99Mdum7annytHHFMVRV+f4Q6R2fsXaO0LuRe25oOJp97JiKb12iJquV0x4UzVVMzxHq54e/fsWMimKb9m3dime1EV0xVET6+8Ycv9RNybd3BtraukZOgYulXrm1Pn+HVr2s5NuLUTPk6LNmKO/IyOaYmKqvpccT+tMPbyNe1nQ+knTrq5g3snVcvD0mzp2qYs3pmc+i/RTRRzzP0rlORFufXPardDV2rVddFyu3RVXbmZoqmmJmn7PUwda0PSdZpwaNTwreTRgZVvMxqapmKbd63z2K+IniZjnmOeY57/QCAd/4mlbe0LZmxd20aZmanfw8rOytT13VsjGxPnFVVFV6I8lPN25NdfFFP6tMd3jwwNm1Xt2bV6IaPrOo6jextQjVMXUqaMu5arv02bNyYt11UzFXH+jpie/mY5j0um7lq1cmibluiuaKu1RNVMT2Z9ceqX6piKY4piIj1QMsXRdNxNH0fD0nT7dVvEw7FFixTVXNcxRTERETVMzMzxHjM8ssAFVXylf0/b4/bN/8AEtVVVfKV/T9vj9s3/wAQI8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABcwAAAAAAAAAAwdc1fTtFwas3Usmixajw575qn1RHjMtW3v1E03Qu3iYHYz9Qjummmf8AR25/rTHjP1R/BDWr6pq+49Ti9mXb2ZkVfRt0U0zPEeqmmPD7lV4x6UYNFviwe3k+kefj5R9Fj4X6PZtVtkzezT6z5feWwb93/n7hmvDxIrw9N548nE/Tux/XmP7o7vtabat3Ltym3aoqrrqnimmmOZmfqhvu2elutah2L2qV06bjz39mqO1dmP8Ao+EffPP1JV2xtTRNu2+NOxI8tMcVX7k9q5V9/o+yOIVfBwDifGMvr9XPZie+ev4V7vosGbjPD+F4/U6aO1Md0dPxn/aMtn9Ls/O7GVrtdWDjz3xYp/1tX2+in7+Z+pLmi6Tp2jYVOHpuLbx7MeMUx31T65nxmftZovnDOC6Thtf5Vfa75nr+34KdxDi2p10/zJ5eEdP/AHmAOs5oAAAAAAAAAAAAAAAAAAAAAAAAAAAAqq+Ur+n7fH7Zv/iWqqqvlK/p+3x+2b/4gR4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC5gAAAAAAH5uUzXbqpprqtzMTEVU8c0/XHMTH7yR5m49w6Tt/F8vqeXTa5j6FuO+5X9lP+PgjbVtc3rvbtY2g6ZkYWmV93b57Hbj+tcniPup/ikfF21otjKnLrwqMrLn87IyZm7cmftq54+7h67i6vQarXezlydinhXrPnafyiPm6um1mn0ntY8fbv426R5Vj85lFO3+kVMTTd13Ue1/8HF8PvrmP7o+9Ieh6Bo+iW+xpmn2MeeOJriOa6vtqnvn970xu0PBtFofc44ifGec/Of0atZxTVaz3t528OkfIAdRzwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABVV8pX9P2+P2zf/ABLVVVXylf0/b4/bN/8AECPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+IeeT0j9m3N7jb+IrzAWGeeT0j9m3N7jb+I4f6x7hwN2dU9ybl0uL0YOpahdybEXqezXFFU8x2oiZ4n72pgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJG2lVomFsG9qOTptORc7Vdu9NVFNU1z38REz4RxMfxRyCDo/eZZ+K1+kW0aTRViIiPVxPKIjnO27//2Q==" alt="Güncel"></div>
+      <p class="footer-desc">1995'ten bu yana Ankara'da büro makineleri, kırtasiye ve bilgisayar alanında güvenilir çözümler sunuyoruz. Kalite ve zamanında teslimat ilkemizden ödün vermiyoruz.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Hızlı Bağlantılar</h4>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="hakkimizda2.html">Hakkımızda</a></li>
+        <li><a href="urunlerimiz.html">Ürünlerimiz</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Ürün Kategorileri</h4>
+      <ul>
+        <li><a href="urunlerimiz.html">Toner & Yazıcı</a></li>
+        <li><a href="urunlerimiz.html">Kağıt & Sarf</a></li>
+        <li><a href="urunlerimiz.html">Büro Araç Gereçleri</a></li>
+        <li><a href="urunlerimiz.html">Elektronik Cihazlar</a></li>
+        <li><a href="urunlerimiz.html">Kırtasiye Malzemeleri</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>İletişim</h4>
+      <div class="footer-contact-item"><span class="icon">📍</span><span>Osmanlı Caddesi No:30/B,<br>Nasuh Akar Mahallesi,<br>Çankaya / Ankara</span></div>
+      <div class="footer-contact-item"><span class="icon">📞</span><span>0530 939 27 22</span></div>
+      <div class="footer-contact-item"><span class="icon">✉️</span><span>guncel.kirtasiye@hotmail.com</span></div>
+      <div class="footer-contact-item"><span class="icon">🕐</span><span>Pzt–Cmt: 08:30 – 18:30</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 <span>Güncel Büro Makineleri</span>. Tüm hakları saklıdır.</span>
+    <span>Osmanlı Caddesi No:30/B · Çankaya · Ankara</span>
+  </div>
+</footer>
+<a href="https://wa.me/905309392722" target="_blank" class="wa-btn" title="WhatsApp Destek Hattı">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+<script>
+  // Active nav link
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  const map = { 'index.html': 'nav-home', 'hakkimizda2.html': 'nav-about', 'urunlerimiz.html': 'nav-products', 'iletisim.html': 'nav-contact' };
+  const activeId = map[page];
+  if (activeId) { const el = document.getElementById(activeId); if (el) el.classList.add('active'); }
+
+  // Fade up on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
