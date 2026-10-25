@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Güncel Kırtasiye - 2026 Kurumsal Ofis İhtiyaç Kataloğu (100 Ürün)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --mor: #7C2D7E;
+      --mor-dark: #581C5A;
+      --mor-light: #F4E8F5;
+      --turuncu: #E86A1A;
+      --turuncu-dark: #C2540E;
+      --turuncu-light: #FDF1E8;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --bg: #F8FAFC;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #475569;
+      color: var(--text);
+      line-height: 1.4;
+      padding: 40px 20px;
+    }
+
+    /* Üst Kontrol Çubuğu (Yazdırma & Bilgi) */
+    .catalog-toolbar {
+      max-width: 210mm;
+      margin: 0 auto 24px;
+      background: #1E293B;
+      border-radius: 14px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #FFFFFF;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .toolbar-info h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .toolbar-info p {
+      font-size: 0.82rem;
+      color: #94A3B8;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(135deg, var(--mor) 0%, var(--turuncu) 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(232, 106, 26, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-pdf:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(232, 106, 26, 0.6);
+    }
+
+    /* A4 Sayfa Boyutlandırması */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      height: 297mm;
+      margin: 0 auto 30px;
+      background: #FFFFFF;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+
+    /* Baskı Ayarları */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .catalog-toolbar {
+        display: none !important;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        height: 297mm;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+
+    /* ========================================================
+       KAPAK SAYFASI (SAYFA 1)
+       ======================================================== */
+    .cover-page {
+      background: linear-gradient(150deg, #1A0A24 0%, #2D113E 45%, #0F172A 100%);
+      color: #FFFFFF;
+      padding: 45mm 20mm 20mm;
+      position: relative;
+    }
+
+    .cover-bg-circle {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,106,26,0.25) 0%, rgba(124,45,126,0) 70%);
+      pointer-events: none;
+    }
+
+    .cover-logo-box {
+      margin-bottom: 25mm;
+    }
+
+    .cover-logo-box img {
+      height: 64px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    }
+
+    .cover-tag {
+      display: inline-block;
+      background: rgba(232,106,26,0.15);
+      border: 1px solid rgba(232,106,26,0.4);
+      color: #FB923C;
+      font-size: 11pt;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 12mm;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cover-title {
+      font-size: 38pt;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 8mm;
+      letter-spacing: -1px;
+    }
+
+    .cover-title span {
+      background: linear-gradient(135deg, #FF8A00 0%, #FFAE42 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #CBD5E1;
+      max-width: 140mm;
+      line-height: 1.5;
+      margin-bottom: 15mm;
+    }
+
+    .cover-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 150mm;
+      margin-bottom: 20mm;
+    }
+
+    .cover-feat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 9.5pt;
+      font-weight: 600;
+    }
+
+    .cover-feat-item span.icon {
+      color: #FB923C;
+      font-size: 14pt;
+    }
+
+    .cover-bottom-bar {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cover-delivery-badge {
+      font-size: 10.5pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cover-delivery-badge span {
+      color: #FB923C;
+    }
+
+    .cover-contact-quick {
+      text-align: right;
+      font-size: 9pt;
+      color: #CBD5E1;
+    }
+
+    .cover-contact-quick strong {
+      color: #FFFFFF;
+      font-size: 11pt;
+      display: block;
+    }
+
+    /* ========================================================
+       İÇ SAYFALAR (SAYFA 2 - 7)
+       ======================================================== */
+    .page-header {
+      padding: 12mm 15mm 4mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .page-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-cat-badge {
+      background: var(--mor);
+      color: #FFFFFF;
+      font-size: 8.5pt;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-cat-title {
+      font-size: 15pt;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .page-header-logo img {
+      height: 32px;
+    }
+
+    /* Ürün Izgarası: Sayfa başına 14 - 16 ürün */
+    .products-grid {
+      padding: 5mm 12mm;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3.5mm;
+      flex-grow: 1;
+    }
+
+    .product-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #FFFFFF;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .product-brand-tag {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      font-size: 6.5pt;
+      font-weight: 800;
+      color: var(--mor);
+      background: var(--mor-light);
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .product-code {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 6pt;
+      color: var(--text-muted);
+      font-family: monospace;
+      font-weight: 700;
+    }
+
+    .product-img-wrap {
+      height: 25mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 6px;
+      background: #FDFDFE;
+      border-radius: 6px;
+      padding: 4px;
+    }
+
+    .product-img-wrap svg,
+    .product-img-wrap img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .product-name {
+      font-size: 8.2pt;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 3px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 20px;
+    }
+
+    .product-spec {
+      font-size: 6.8pt;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .product-order-box {
+      background: var(--turuncu-light);
+      border: 1px dashed var(--turuncu);
+      border-radius: 5px;
+      padding: 3px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: var(--turuncu-dark);
+    }
+
+    .page-footer {
+      padding: 3mm 15mm 5mm;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      background: #FAFAFC;
+    }
+
+    .page-footer strong {
+      color: var(--text);
+    }
+
+    .page-footer-wa {
+      color: #16A34A;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ========================================================
+       ARKA KAPAK (SAYFA 8)
+       ======================================================== */
+    .back-cover {
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 25mm 20mm 15mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .back-top-logo {
+      text-align: center;
+      margin-bottom: 10mm;
+    }
+
+    .back-top-logo img {
+      height: 52px;
+    }
+
+    .back-order-card {
+      background: linear-gradient(135deg, rgba(124,45,126,0.3) 0%, rgba(232,106,26,0.3) 100%);
+      border: 1.5px solid rgba(232,106,26,0.5);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 12mm;
+    }
+
+    .back-order-card h3 {
+      font-size: 18pt;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .back-order-card p {
+      font-size: 10pt;
+      color: #CBD5E1;
+      max-width: 120mm;
+      margin: 0 auto 16px;
+      line-height: 1.5;
+    }
+
+    .back-wa-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #FFFFFF;
+      padding: 12px 28px;
+      border-radius: 9999px;
+      font-size: 14pt;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+    }
+
+    .back-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 10mm;
+    }
+
+    .back-contact-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+
+    .back-contact-box h4 {
+      font-size: 9pt;
+      color: #FB923C;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .back-contact-box p {
+      font-size: 9.5pt;
+      color: #E2E8F0;
+      line-height: 1.4;
+    }
+
+    .back-footer-note {
+      text-align: center;
+      font-size: 8pt;
+      color: #64748B;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- KONTROL ÇUBUĞU -->
+  <div class="catalog-toolbar">
+    <div class="toolbar-info">
+      <h2>Güncel Kırtasiye — 2026 Ofis İhtiyaç Kataloğu (100 Ürün)</h2>
+      <p>8 Sayfa Tam A4 Matbaa & PDF Formatı • Sadece Lider Markalar (Copier Bond, Double A, Leitz, Mas, Pritt, Faber-Castell...)</p>
+    </div>
+    <button class="btn-pdf" onclick="window.print()">
+      <span>🖨️</span> PDF Olarak Kaydet / Yazdır
+    </button>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 1: ÖN KAPAK
+       ========================================== -->
+  <div class="page cover-page">
+    <div class="cover-bg-circle"></div>
+
+    <div>
+      <div class="cover-logo-box">
+        <img src="logo.PNG" alt="Güncel Büro Makineleri & Kırtasiye">
+      </div>
+
+      <div class="cover-tag">2026 Kurumsal Ofis Çözümleri</div>
+
+      <h1 class="cover-title">
+        Ofisinizin Tüm İhtiyacı<br>
+        <span>Tek Listede, Kapınızda!</span>
+      </h1>
+
+      <p class="cover-subtitle">
+        Balgat ve Çankaya bölgesindeki şirketler, kurumlar, hukuk ve mühendislik ofisleri için en çok tüketilen 100 lider kırtasiye & kağıt ürünü.
+      </p>
+
+      <div class="cover-features">
+        <div class="cover-feat-item">
+          <span class="icon">⚡</span>
+          <span>Balgat İçi Aynı Gün Ücretsiz Teslimat</span>
+        </div>
+        <div class="cover-feat-item">
+          <span class="icon">📦</span>
+          <span>Koli & Toptan Fiyat Avantajı</span>
+        </div>
+        <div class="cover-feat-item">
+          <span class="icon">🧾</span>
+          <span>Kurumsal E-Fatura İmkanı</span>
+        </div>
+        <div class="cover-feat-item">
+          <span class="icon">⭐</span>
+          <span>%100 Orijinal 1. Sınıf Markalar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-bottom-bar">
+      <div class="cover-delivery-badge">
+        <span>📍</span> Balgat / Nasuh Akar Mah. Osmanlı Cad. No: 30/B
+      </div>
+      <div class="cover-contact-quick">
+        WhatsApp Hızlı Sipariş Hattı
+        <strong>0507 120 16 43</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 2: FOTOKOPİ KAĞIDI & BASKI MALZEMELERİ
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-cat-badge">BÖLÜM 01</span>
+        <h2 class="page-cat-title">Fotokopi Kağıdı & Baskı Grubu</h2>
+      </div>
+      <div class="page-header-logo">
+        <img src="logo.PNG" alt="Güncel">
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <!-- 1 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Copier Bond</span>
+        <span class="product-code">#CB-A4</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="10" y="10" width="60" height="80" rx="3" fill="#D92D20"/><rect x="15" y="15" width="50" height="70" rx="2" fill="#FFFFFF"/><text x="40" y="45" font-size="10" font-weight="900" fill="#D92D20" text-anchor="middle">COPIER</text><text x="40" y="56" font-size="9" font-weight="900" fill="#D92D20" text-anchor="middle">BOND</text><text x="40" y="70" font-size="6" fill="#333" text-anchor="middle">A4 80 gr</text></svg>
+        </div>
+        <div class="product-name">Copier Bond A4 80 gr Fotokopi Kağıdı</div>
+        <div class="product-spec">1 Koli (5 Paket / 2500 Sayfa) • Lazer & Mürekkep Uyumlu</div>
+        <div class="product-order-box"><span>Koli Bazlı Satış</span><span>KOD: 101</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Double A</span>
+        <span class="product-code">#DA-A4</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="10" y="10" width="60" height="80" rx="3" fill="#004FB8"/><rect x="15" y="15" width="50" height="70" rx="2" fill="#FFFFFF"/><text x="40" y="46" font-size="11" font-weight="900" fill="#004FB8" text-anchor="middle">Double A</text><text x="40" y="60" font-size="7" font-weight="700" fill="#004FB8" text-anchor="middle">PREMIUM A4</text><text x="40" y="72" font-size="6" fill="#666" text-anchor="middle">80 gr / Jam-Free</text></svg>
+        </div>
+        <div class="product-name">Double A Premium A4 Fotokopi Kağıdı</div>
+        <div class="product-spec">Ekstra Beyazlık • Pürüzsüz Yüzey • Sıkışma Yapmaz</div>
+        <div class="product-order-box"><span>Koli Bazlı Satış</span><span>KOD: 102</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Navigator</span>
+        <span class="product-code">#NAV-A4</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="10" y="10" width="60" height="80" rx="3" fill="#008080"/><rect x="15" y="15" width="50" height="70" rx="2" fill="#FFFFFF"/><text x="40" y="48" font-size="8.5" font-weight="900" fill="#008080" text-anchor="middle">Navigator</text><text x="40" y="62" font-size="6.5" font-weight="700" fill="#333" text-anchor="middle">UNIVERSAL 80gr</text></svg>
+        </div>
+        <div class="product-name">Navigator Universal A4 Fotokopi Kağıdı</div>
+        <div class="product-spec">Yüksek Yoğunluk • Çift Taraflı Baskıda Kusursuz</div>
+        <div class="product-order-box"><span>Koli Bazlı Satış</span><span>KOD: 103</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Copier Bond</span>
+        <span class="product-code">#CB-A3</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 95 80" width="75" height="60"><rect x="5" y="10" width="85" height="60" rx="3" fill="#D92D20"/><rect x="10" y="14" width="75" height="52" rx="2" fill="#FFFFFF"/><text x="47" y="38" font-size="9" font-weight="900" fill="#D92D20" text-anchor="middle">COPIER BOND</text><text x="47" y="52" font-size="7.5" font-weight="800" fill="#333" text-anchor="middle">A3 BOYUT (80 gr)</text></svg>
+        </div>
+        <div class="product-name">Copier Bond A3 80 gr Fotokopi Kağıdı</div>
+        <div class="product-spec">Mimarlık, Proje & Çizim Çıktıları • Koli (5 Paket)</div>
+        <div class="product-order-box"><span>Koli Bazlı Satış</span><span>KOD: 104</span></div>
+      </div>
+      <!-- 5 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Rey</span>
+        <span class="product-code">#REY-COL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="10" y="10" width="60" height="80" rx="3" fill="#F59E0B"/><rect x="15" y="15" width="50" height="70" rx="2" fill="#FEF3C7"/><text x="40" y="50" font-size="9" font-weight="800" fill="#B45309" text-anchor="middle">RENKLİ A4</text><text x="40" y="65" font-size="6" fill="#666" text-anchor="middle">Karışık Pastel 100'lü</text></svg>
+        </div>
+        <div class="product-name">Renkli A4 Fotokopi Kağıdı (Pastel)</div>
+        <div class="product-spec">Sarı, Mavi, Pembe, Yeşil • Duyuru & Evrak Ayrımı</div>
+        <div class="product-order-box"><span>100'lü Paket</span><span>KOD: 105</span></div>
+      </div>
+      <!-- 6 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-NOT</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="12" y="10" width="56" height="80" rx="2" fill="#E2E8F0"/><line x1="20" y1="25" x2="60" y2="25" stroke="#94A3B8" stroke-width="2"/><line x1="20" y1="35" x2="60" y2="35" stroke="#94A3B8" stroke-width="2"/><line x1="20" y1="45" x2="60" y2="45" stroke="#94A3B8" stroke-width="2"/><text x="40" y="70" font-size="7" font-weight="800" fill="#475569" text-anchor="middle">A4 BLOKNOT</text></svg>
+        </div>
+        <div class="product-name">Gıpta Üstten Perforajlı A4 Bloknot</div>
+        <div class="product-spec">Kareli / Çizgili • 50 Yaprak • Toplantı & Not Tutma</div>
+        <div class="product-order-box"><span>10'lu Paket</span><span>KOD: 106</span></div>
+      </div>
+      <!-- 7 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Kodak</span>
+        <span class="product-code">#KDK-GLS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="10" y="10" width="60" height="80" rx="3" fill="#EF4444"/><rect x="15" y="15" width="50" height="70" rx="2" fill="#FFFFFF"/><text x="40" y="48" font-size="8" font-weight="900" fill="#EF4444" text-anchor="middle">GLOSSY</text><text x="40" y="62" font-size="6.5" font-weight="700" fill="#333" text-anchor="middle">200 gr Foto A4</text></svg>
+        </div>
+        <div class="product-name">Parlak Fotoğraf Kağıdı A4 200 gr</div>
+        <div class="product-spec">Yüksek Çözünürlüklü Parlak Kuşe Çıktı Kağıdı</div>
+        <div class="product-order-box"><span>50'li Paket</span><span>KOD: 107</span></div>
+      </div>
+      <!-- 8 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Ve-Ge</span>
+        <span class="product-code">#VG-FORM</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 90" width="65" height="70"><rect x="8" y="10" width="69" height="70" rx="2" fill="#F1F5F9" stroke="#CBD5E1"/><circle cx="13" cy="20" r="1.5" fill="#64748B"/><circle cx="13" cy="30" r="1.5" fill="#64748B"/><circle cx="13" cy="40" r="1.5" fill="#64748B"/><text x="45" y="48" font-size="7" font-weight="800" fill="#334155" text-anchor="middle">SÜREKLİ FORM</text></svg>
+        </div>
+        <div class="product-name">Ve-Ge 1. Hamur Sürekli Form (1-2-3 Nüsha)</div>
+        <div class="product-spec">Matbu İrsaliye & Fatura Baskı Kağıtları</div>
+        <div class="product-order-box"><span>1 Koli</span><span>KOD: 108</span></div>
+      </div>
+      <!-- 9 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Tanex</span>
+        <span class="product-code">#TNX-LBL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 100" width="60" height="75"><rect x="10" y="10" width="60" height="80" rx="3" fill="#10B981"/><rect x="15" y="15" width="50" height="70" rx="2" fill="#FFFFFF"/><rect x="20" y="25" width="18" height="12" fill="#E2E8F0"/><rect x="42" y="25" width="18" height="12" fill="#E2E8F0"/><text x="40" y="65" font-size="7" font-weight="800" fill="#047857" text-anchor="middle">ETİKET A4</text></svg>
+        </div>
+        <div class="product-name">Tanex Kendinden Yapışkanlı Lazer Etiket</div>
+        <div class="product-spec">Tüm Ebatlar (Koli, Fatura, Dosya Sırtlık Etiketleri)</div>
+        <div class="product-order-box"><span>100 Sayfa/Kutu</span><span>KOD: 109</span></div>
+      </div>
+      <!-- 10 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-KUP</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 80" width="60" height="60"><rect x="15" y="15" width="50" height="50" rx="4" fill="#FEF08A" stroke="#EAB308"/><text x="40" y="45" font-size="8" font-weight="800" fill="#854D0E" text-anchor="middle">KÜP NOT</text></svg>
+        </div>
+        <div class="product-name">Küp Not Kağıdı (9x9 cm - 500 Yaprak)</div>
+        <div class="product-spec">Renkli & Beyaz • Masaüstü Plastik Kutulu / Yedek</div>
+        <div class="product-order-box"><span>500 Yaprak</span><span>KOD: 110</span></div>
+      </div>
+      <!-- 11 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pelikan</span>
+        <span class="product-code">#PLK-CRB</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 90" width="60" height="70"><rect x="10" y="10" width="60" height="70" rx="2" fill="#1E293B"/><text x="40" y="50" font-size="7.5" font-weight="800" fill="#94A3B8" text-anchor="middle">KARBON KAĞIDI</text></svg>
+        </div>
+        <div class="product-name">Pelikan Siyah / Mavi A4 Karbon Kağıdı</div>
+        <div class="product-spec">100 Yaprak • Yüksek Kopyalama Mukavemeti</div>
+        <div class="product-order-box"><span>100'lü Kutu</span><span>KOD: 111</span></div>
+      </div>
+      <!-- 12 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-FON</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 90" width="65" height="70"><rect x="10" y="10" width="65" height="70" rx="3" fill="#8B5CF6"/><text x="42" y="50" font-size="8" font-weight="800" fill="#FFFFFF" text-anchor="middle">FON KARTONU</text></svg>
+        </div>
+        <div class="product-name">50x70 cm Renkli Fon Kartonu Çeşitleri</div>
+        <div class="product-spec">Proje, Sunum ve Grafik Çizim Kartonları</div>
+        <div class="product-order-box"><span>10'lu Paket</span><span>KOD: 112</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div><strong>Güncel Büro Makinaları & Kırtasiye</strong> • Balgat / Çankaya / Ankara</div>
+      <div class="page-footer-wa">💬 WhatsApp Sipariş: 0507 120 16 43</div>
+      <div>Sayfa 2</div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 3: DOSYALAMA & ARŞİVLEME
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-cat-badge">BÖLÜM 02</span>
+        <h2 class="page-cat-title">Dosyalama & Arşivleme Grubu</h2>
+      </div>
+      <div class="page-header-logo">
+        <img src="logo.PNG" alt="Güncel">
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <!-- 1 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Leitz</span>
+        <span class="product-code">#LTZ-KLS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 100" width="55" height="80"><path d="M 15 10 L 55 10 L 55 90 L 15 90 Z" fill="#0284C7" stroke="#0369A1" stroke-width="2"/><circle cx="35" cy="70" r="5" fill="#FFFFFF"/><rect x="22" y="20" width="26" height="35" fill="#FFFFFF"/><text x="35" y="38" font-size="7" font-weight="900" fill="#0284C7" text-anchor="middle">LEITZ</text></svg>
+        </div>
+        <div class="product-name">Leitz 180° Geniş Büro Klasörü (Mavi)</div>
+        <div class="product-spec">Patentli 180° Mekanizma • 500 Sayfa • Metal Kenar Korumalı</div>
+        <div class="product-order-box"><span>Koli (25 Adet)</span><span>KOD: 201</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-KLS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 100" width="55" height="80"><path d="M 15 10 L 55 10 L 55 90 L 15 90 Z" fill="#DC2626" stroke="#B91C1C" stroke-width="2"/><circle cx="35" cy="70" r="5" fill="#FFFFFF"/><rect x="22" y="20" width="26" height="35" fill="#FFFFFF"/><text x="35" y="38" font-size="8" font-weight="900" fill="#DC2626" text-anchor="middle">MAS</text></svg>
+        </div>
+        <div class="product-name">Mas Standart Plastik Geniş Klasör</div>
+        <div class="product-spec">Siyah, Kırmızı, Mavi, Sarı • Dayanıklı Avrupa Mekanizma</div>
+        <div class="product-order-box"><span>Koli (25 Adet)</span><span>KOD: 202</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-DAR</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 60 100" width="45" height="80"><path d="M 15 10 L 45 10 L 45 90 L 15 90 Z" fill="#1E293B" stroke="#0F172A" stroke-width="2"/><circle cx="30" cy="70" r="4" fill="#FFFFFF"/><rect x="20" y="20" width="20" height="30" fill="#FFFFFF"/><text x="30" y="37" font-size="6.5" font-weight="900" fill="#1E293B" text-anchor="middle">DAR</text></svg>
+        </div>
+        <div class="product-name">Mas Standart Dar Büro Klasörü</div>
+        <div class="product-spec">Dar Sırt (5 cm) • 350 Sayfa Kapasiteli Arşiv Klasörü</div>
+        <div class="product-order-box"><span>Koli (30 Adet)</span><span>KOD: 203</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Noki</span>
+        <span class="product-code">#NOK-POS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 95" width="55" height="75"><rect x="10" y="10" width="55" height="75" rx="3" fill="#E0F2FE" stroke="#38BDF8"/><line x1="16" y1="20" x2="16" y2="80" stroke="#0284C7" stroke-dasharray="2,3"/><text x="38" y="52" font-size="8" font-weight="900" fill="#0284C7" text-anchor="middle">POŞET DOSYA</text><text x="38" y="65" font-size="6" fill="#666" text-anchor="middle">100'lü Paket</text></svg>
+        </div>
+        <div class="product-name">Noki Şeffaf Poşet Dosya A4 (100'lü)</div>
+        <div class="product-spec">Buzlu / Şeffaf • Yırtılmaz Delikli Şerit • Arşiv Kalitesi</div>
+        <div class="product-order-box"><span>1 Paket (100 Adet)</span><span>KOD: 204</span></div>
+      </div>
+      <!-- 5 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Noki</span>
+        <span class="product-code">#NOK-TEL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 95" width="55" height="75"><rect x="10" y="10" width="55" height="75" rx="2" fill="#E0E7FF" stroke="#6366F1"/><path d="M 14 10 L 22 10 L 22 85 L 14 85 Z" fill="#4F46E5"/><text x="45" y="52" font-size="7.5" font-weight="800" fill="#4338CA" text-anchor="middle">TELLİ DOSYA</text></svg>
+        </div>
+        <div class="product-name">Noki Plastik Telli Dosya A4 (50'li)</div>
+        <div class="product-spec">Şeffaf Üst Kapak • Renkli Sırtlık • 50'li Kutu</div>
+        <div class="product-order-box"><span>50'li Paket</span><span>KOD: 205</span></div>
+      </div>
+      <!-- 6 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Noki</span>
+        <span class="product-code">#NOK-LFO</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 95" width="55" height="75"><path d="M 15 10 L 65 10 L 65 85 L 15 85 Z" fill="#F8FAFC" stroke="#94A3B8"/><path d="M 15 10 L 45 10 L 15 40 Z" fill="#E2E8F0"/><text x="40" y="55" font-size="8" font-weight="900" fill="#475569" text-anchor="middle">L POŞET</text></svg>
+        </div>
+        <div class="product-name">Noki L Tipi Şeffaf Föy Dosya (100'lü)</div>
+        <div class="product-spec">Üstten ve Yandan Açık • Hızlı Evrak Sunum Dosyası</div>
+        <div class="product-order-box"><span>100'lü Paket</span><span>KOD: 206</span></div>
+      </div>
+      <!-- 7 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-RAF</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 75" width="70" height="60"><rect x="10" y="15" width="65" height="12" rx="2" fill="#334155"/><rect x="10" y="32" width="65" height="12" rx="2" fill="#475569"/><rect x="10" y="49" width="65" height="12" rx="2" fill="#64748B"/></svg>
+        </div>
+        <div class="product-name">Mas 3'lü Hareketli Plastik Evrak Rafı</div>
+        <div class="product-spec">Siyah & Şeffaf • Masaüstü Düzenleyici Katlı Raf</div>
+        <div class="product-order-box"><span>1 Takım</span><span>KOD: 207</span></div>
+      </div>
+      <!-- 8 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-MAG</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 85" width="55" height="70"><path d="M 15 80 L 15 15 L 35 15 L 55 50 L 55 80 Z" fill="#1E293B"/><circle cx="35" cy="65" r="4" fill="#FFFFFF"/></svg>
+        </div>
+        <div class="product-name">Mas Plastik Magazinlik / Arşivlik</div>
+        <div class="product-spec">Katalog, Dergi & Dosya Arşiv Kutusu • Dikey</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 208</span></div>
+      </div>
+      <!-- 9 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Noki</span>
+        <span class="product-code">#NOK-KTC</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 65" width="70" height="55"><rect x="10" y="12" width="65" height="45" rx="4" fill="#FEF3C7" stroke="#F59E0B"/><circle cx="42" cy="35" r="3" fill="#D97706"/></svg>
+        </div>
+        <div class="product-name">Noki Çıtçıtlı Şeffaf Evrak Zarfı A4</div>
+        <div class="product-spec">Renkli Çıtçıtlı Dosya • Su ve Toz Geçirmez Evrak Koruma</div>
+        <div class="product-order-box"><span>12'li Paket</span><span>KOD: 209</span></div>
+      </div>
+      <!-- 10 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-IMZ</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 95" width="55" height="75"><rect x="12" y="10" width="52" height="75" rx="3" fill="#831843"/><text x="38" y="52" font-size="7" font-weight="900" fill="#FBCFE8" text-anchor="middle">İMZA DEFTERİ</text></svg>
+        </div>
+        <div class="product-name">Gıpta Lüks Ciltli İmza Defteri (Sümen)</div>
+        <div class="product-spec">20 Yaprak Ciltli • Yönetici & Müdür Onay Defteri</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 210</span></div>
+      </div>
+      <!-- 11 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Noki</span>
+        <span class="product-code">#NOK-SEP</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 90" width="55" height="70"><rect x="12" y="12" width="52" height="70" fill="#E2E8F0"/><rect x="58" y="20" width="10" height="10" fill="#EF4444"/><rect x="58" y="35" width="10" height="10" fill="#3B82F6"/><rect x="58" y="50" width="10" height="10" fill="#10B981"/></svg>
+        </div>
+        <div class="product-name">Noki Plastik Klasör Seperatörü (1-12)</div>
+        <div class="product-spec">Aylık & Harfli Evrak Ayırıcı • 12 Parça Renkli</div>
+        <div class="product-order-box"><span>1 Takım</span><span>KOD: 211</span></div>
+      </div>
+      <!-- 12 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-ASK</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 70" width="70" height="55"><path d="M 10 20 L 75 20 L 70 60 L 15 60 Z" fill="#047857"/><line x1="8" y1="18" x2="77" y2="18" stroke="#10B981" stroke-width="3"/></svg>
+        </div>
+        <div class="product-name">Mas Askılı Dosya (Metal Askılı)</div>
+        <div class="product-spec">Çekmece ve Arşiv Dolapları İçin Metal Raylı Dosya</div>
+        <div class="product-order-box"><span>25'li Paket</span><span>KOD: 212</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div><strong>Güncel Büro Makinaları & Kırtasiye</strong> • Balgat / Çankaya / Ankara</div>
+      <div class="page-footer-wa">💬 WhatsApp Sipariş: 0507 120 16 43</div>
+      <div>Sayfa 3</div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 4: MASAÜSTÜ ZIMBA & DELGEÇ
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-cat-badge">BÖLÜM 03</span>
+        <h2 class="page-cat-title">Masaüstü Ofis Gereçleri (Zımba & Kesici)</h2>
+      </div>
+      <div class="page-header-logo">
+        <img src="logo.PNG" alt="Güncel">
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <!-- 1 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-ZMB</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 60" width="75" height="50"><rect x="15" y="30" width="60" height="15" rx="3" fill="#1E293B"/><rect x="25" y="15" width="45" height="16" rx="2" fill="#475569"/><line x1="20" y1="38" x2="70" y2="38" stroke="#94A3B8" stroke-width="2"/></svg>
+        </div>
+        <div class="product-name">Mas 820 Büro Tipi Metal Zımba Makinesi</div>
+        <div class="product-spec">No: 24/6 ve 26/6 Tel • 30 Sayfa Zımbalama Kapasitesi</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 301</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Kangaro</span>
+        <span class="product-code">#KNG-AGR</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 95 65" width="80" height="55"><rect x="10" y="35" width="75" height="18" rx="4" fill="#0F172A"/><rect x="20" y="12" width="60" height="22" rx="3" fill="#DC2626"/><text x="50" y="27" font-size="7" font-weight="900" fill="#FFFFFF" text-anchor="middle">KANGARO</text></svg>
+        </div>
+        <div class="product-name">Kangaro DS-23S15 Ağır Hizmet Büyük Zımba</div>
+        <div class="product-spec">120 Sayfaya Kadar Evrak Zımbalama • Ayarlanabilir Cetvelli</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 302</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-TEL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 60" width="65" height="50"><rect x="15" y="15" width="50" height="30" rx="3" fill="#F59E0B"/><text x="40" y="34" font-size="8" font-weight="900" fill="#78350F" text-anchor="middle">24/6 TEL</text></svg>
+        </div>
+        <div class="product-name">Mas 24/6 Standart Zımba Teli (1000'li)</div>
+        <div class="product-spec">Çelik Alaşım • Bükülmez • 10 Kutu Paket</div>
+        <div class="product-order-box"><span>10 Kutu Paket</span><span>KOD: 303</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-DLG</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 65" width="70" height="55"><rect x="15" y="35" width="55" height="18" rx="3" fill="#1E293B"/><rect x="25" y="15" width="35" height="20" rx="2" fill="#3B82F6"/><circle cx="32" cy="44" r="3" fill="#FFFFFF"/><circle cx="52" cy="44" r="3" fill="#FFFFFF"/></svg>
+        </div>
+        <div class="product-name">Mas Orta Boy Çelik Delgeç (30 Sayfa)</div>
+        <div class="product-spec">Ayarlı Kağıt Hizalama Çubuğu • Kaymaz Taban</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 304</span></div>
+      </div>
+      <!-- 5 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Kangaro</span>
+        <span class="product-code">#KNG-DLG</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 70" width="75" height="60"><rect x="10" y="40" width="70" height="20" rx="4" fill="#0F172A"/><rect x="20" y="15" width="50" height="25" rx="3" fill="#DC2626"/></svg>
+        </div>
+        <div class="product-name">Kangaro Ağır Hizmet Büyük Delgeç (60 Sayfa)</div>
+        <div class="product-spec">Kuvvet Tasarruflu Kol • Yoğun Arşiv ve Hukuk Büroları İçin</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 305</span></div>
+      </div>
+      <!-- 6 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-SOK</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 50" width="65" height="40"><path d="M 20 15 L 60 15 L 50 35 L 30 35 Z" fill="#475569"/><circle cx="40" cy="25" r="4" fill="#E2E8F0"/></svg>
+        </div>
+        <div class="product-name">Mas Kıskaç Tipi Zımba Teli Sökücü</div>
+        <div class="product-spec">Kağıdı Yırtmadan Pratik Zımba Teli Çıkarıcı</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 306</span></div>
+      </div>
+      <!-- 7 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Maped</span>
+        <span class="product-code">#MPD-MKS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 80" width="65" height="65"><circle cx="28" cy="60" r="10" fill="none" stroke="#DC2626" stroke-width="4"/><circle cx="52" cy="60" r="10" fill="none" stroke="#DC2626" stroke-width="4"/><line x1="33" y1="52" x2="55" y2="18" stroke="#94A3B8" stroke-width="4"/><line x1="47" y1="52" x2="25" y2="18" stroke="#94A3B8" stroke-width="4"/></svg>
+        </div>
+        <div class="product-name">Maped Advanced Paslanmaz Çelik Büro Makası</div>
+        <div class="product-spec">21 cm • Ergonomik Yumuşak Tutuş • Lazer Bilemeli</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 307</span></div>
+      </div>
+      <!-- 8 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-MKT</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="15" y="12" width="60" height="16" rx="3" fill="#EAB308"/><polygon points="75,15 88,20 75,25" fill="#CBD5E1"/></svg>
+        </div>
+        <div class="product-name">Mas Geniş Maket Bıçağı (Falsofa - 18 mm)</div>
+        <div class="product-spec">Otomatik Kilitli Çelik Gövde • Yedek Bıçak Uyumlu</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 308</span></div>
+      </div>
+      <!-- 9 -->
+      <div class="product-card">
+        <span class="product-brand-tag">SDI</span>
+        <span class="product-code">#SDI-YDK</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 45" width="70" height="35"><rect x="15" y="10" width="55" height="25" rx="3" fill="#1E293B"/><text x="42" y="27" font-size="7" font-weight="900" fill="#FFFFFF" text-anchor="middle">10'LU BIÇAK</text></svg>
+        </div>
+        <div class="product-name">SDI 18 mm Kırılabilir Maket Bıçağı Ucu</div>
+        <div class="product-spec">10'lu Plastik Emniyetli Kutu • Ekstra Keskin Çelik</div>
+        <div class="product-order-box"><span>1 Kutu (10'lu)</span><span>KOD: 309</span></div>
+      </div>
+      <!-- 10 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-ATS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 60 70" width="50" height="60"><path d="M 25 15 L 25 55 A 8 8 0 0 0 41 55 L 41 25 A 5 5 0 0 0 31 25 L 31 50" fill="none" stroke="#64748B" stroke-width="3"/></svg>
+        </div>
+        <div class="product-name">Mas Nikelajlı Çelik Ataş Çeşitleri (No: 3-4-5)</div>
+        <div class="product-spec">Paslanmaz Parlak Çelik • 100'lü Kutu</div>
+        <div class="product-order-box"><span>10 Kutu Paket</span><span>KOD: 310</span></div>
+      </div>
+      <!-- 11 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-KSK</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 65" width="55" height="50"><rect x="15" y="25" width="40" height="30" rx="3" fill="#0F172A"/><path d="M 22 25 L 22 10 L 48 10 L 48 25" fill="none" stroke="#CBD5E1" stroke-width="3"/></svg>
+        </div>
+        <div class="product-name">Mas Siyah Metal Arşiv Kıskacı (19-25-32-41 mm)</div>
+        <div class="product-spec">Güçlü Sıkıştırma Mandallı • 12'li Kutu</div>
+        <div class="product-order-box"><span>12'li Kutu</span><span>KOD: 311</span></div>
+      </div>
+      <!-- 12 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-SET</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 65" width="70" height="55"><rect x="10" y="20" width="65" height="35" rx="4" fill="#334155"/><rect x="18" y="10" width="15" height="30" fill="#475569"/><rect x="40" y="25" width="12" height="15" fill="#CBD5E1"/></svg>
+        </div>
+        <div class="product-name">Mas Masaüstü Düzenleyici Organizer Set</div>
+        <div class="product-spec">Kalemlik, Ataşlık, Notluk Bir Arada • Metal Perfore</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 312</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div><strong>Güncel Büro Makinaları & Kırtasiye</strong> • Balgat / Çankaya / Ankara</div>
+      <div class="page-footer-wa">💬 WhatsApp Sipariş: 0507 120 16 43</div>
+      <div>Sayfa 4</div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 5: BANT, YAPIŞTIRICI & DAKSİL
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-cat-badge">BÖLÜM 04</span>
+        <h2 class="page-cat-title">Bantlar, Yapıştırıcı & Daksil Grubu</h2>
+      </div>
+      <div class="page-header-logo">
+        <img src="logo.PNG" alt="Güncel">
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <!-- 1 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Ve-Ge</span>
+        <span class="product-code">#VG-KOL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 80" width="65" height="65"><circle cx="40" cy="40" r="32" fill="#D97706"/><circle cx="40" cy="40" r="16" fill="#FFFFFF"/><text x="40" y="44" font-size="7" font-weight="900" fill="#78350F" text-anchor="middle">VE-GE</text></svg>
+        </div>
+        <div class="product-name">Ve-Ge Şeffaf / Taba Koli Bandı (45x100 m)</div>
+        <div class="product-spec">Kuvvetli Hotmelt Yapışkan • Koli Bazlı Satış (60 Rulo)</div>
+        <div class="product-order-box"><span>Koli (60 Rulo)</span><span>KOD: 401</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="product-card">
+        <span class="product-brand-tag">3M Scotch</span>
+        <span class="product-code">#3M-MAG</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 75" width="60" height="60"><circle cx="37" cy="37" r="28" fill="#10B981"/><circle cx="37" cy="37" r="14" fill="#FFFFFF"/><text x="37" y="41" font-size="6.5" font-weight="900" fill="#047857" text-anchor="middle">MAGIC</text></svg>
+        </div>
+        <div class="product-name">3M Scotch Magic Görünmez Yazılabilir Bant</div>
+        <div class="product-spec">Üzerine Yazı Yazılabilir • Fotokopide İz Bırakmaz (19x33m)</div>
+        <div class="product-order-box"><span>1 Rulo</span><span>KOD: 402</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Ve-Ge</span>
+        <span class="product-code">#VG-PAR</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 75" width="60" height="60"><circle cx="37" cy="37" r="28" fill="#FBBF24"/><circle cx="37" cy="37" r="14" fill="#FFFFFF"/><text x="37" y="41" font-size="6.5" font-weight="800" fill="#92400E" text-anchor="middle">PARA</text></svg>
+        </div>
+        <div class="product-name">Ve-Ge Şeffaf Para / Selefon Bant (12x33 m)</div>
+        <div class="product-spec">Masaüstü Küçük Bant • 12'li Kule Paket</div>
+        <div class="product-order-box"><span>12'li Paket</span><span>KOD: 403</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-DIS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 60" width="70" height="50"><rect x="15" y="25" width="55" height="25" rx="4" fill="#334155"/><circle cx="30" cy="22" r="14" fill="#64748B"/></svg>
+        </div>
+        <div class="product-name">Mas Ağır Metal Tabanlı Masaüstü Bant Kesici</div>
+        <div class="product-spec">Kaymaz Ağır Taban • Çift Boy Makara Uyumlu</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 404</span></div>
+      </div>
+      <!-- 5 -->
+      <div class="product-card">
+        <span class="product-brand-tag">3M</span>
+        <span class="product-code">#3M-CFT</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 75" width="60" height="60"><circle cx="37" cy="37" r="28" fill="#EF4444"/><circle cx="37" cy="37" r="14" fill="#FFFFFF"/><text x="37" y="41" font-size="6" font-weight="900" fill="#991B1B" text-anchor="middle">ÇİFT TARAFLI</text></svg>
+        </div>
+        <div class="product-name">3M Çift Taraflı Şeffaf / Sünger Köpük Bant</div>
+        <div class="product-spec">Yüksek Tutuculuk • Tabela, Pano ve Montaj Bandı</div>
+        <div class="product-order-box"><span>1 Rulo</span><span>KOD: 405</span></div>
+      </div>
+      <!-- 6 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pritt</span>
+        <span class="product-code">#PRT-STK</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 50 90" width="40" height="70"><rect x="15" y="10" width="20" height="15" rx="2" fill="#DC2626"/><rect x="15" y="25" width="20" height="55" fill="#EF4444"/><text x="25" y="55" font-size="7" font-weight="900" fill="#FFFFFF" text-anchor="middle">Pritt</text></svg>
+        </div>
+        <div class="product-name">Pritt Stick Yapıştırıcı (43 gr Büyük Boy)</div>
+        <div class="product-spec">Solventsiz • Kağıt ve Kartonda Dalgalanma Yapmaz</div>
+        <div class="product-order-box"><span>12'li Kutu</span><span>KOD: 406</span></div>
+      </div>
+      <!-- 7 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pritt</span>
+        <span class="product-code">#PRT-MED</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 45 80" width="35" height="65"><rect x="15" y="10" width="16" height="12" rx="2" fill="#DC2626"/><rect x="15" y="22" width="16" height="50" fill="#EF4444"/><text x="23" y="48" font-size="6" font-weight="900" fill="#FFFFFF" text-anchor="middle">Pritt</text></svg>
+        </div>
+        <div class="product-name">Pritt Stick Yapıştırıcı (22 gr Orta Boy)</div>
+        <div class="product-spec">Her Masada Bulunması Gereken Klasik Ofis Boyu</div>
+        <div class="product-order-box"><span>24'lü Kutu</span><span>KOD: 407</span></div>
+      </div>
+      <!-- 8 -->
+      <div class="product-card">
+        <span class="product-brand-tag">UHU</span>
+        <span class="product-code">#UHU-SIV</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 70" width="55" height="55"><polygon points="15,55 35,15 55,55" fill="#FACC15"/><text x="35" y="48" font-size="8" font-weight="900" fill="#1E293B" text-anchor="middle">UHU</text></svg>
+        </div>
+        <div class="product-name">UHU Sıvı Çok Amaçlı Yapıştırıcı (35 ml)</div>
+        <div class="product-spec">Kağıt, Ahşap, Kumaş, Deri ve Plastik İçin Hızlı Yapıştırıcı</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 408</span></div>
+      </div>
+      <!-- 9 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Tipp-Ex</span>
+        <span class="product-code">#TPX-SRT</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 60" width="55" height="48"><rect x="15" y="15" width="40" height="30" rx="6" fill="#3B82F6"/><text x="35" y="34" font-size="7" font-weight="900" fill="#FFFFFF" text-anchor="middle">Tipp-Ex</text></svg>
+        </div>
+        <div class="product-name">Tipp-Ex Pocket Dry Şerit Daksil (10 m)</div>
+        <div class="product-spec">Kuruma Süresi Yok • Anında Üzerine Temiz Yazı Yazılabilir</div>
+        <div class="product-order-box"><span>10'lu Kutu</span><span>KOD: 409</span></div>
+      </div>
+      <!-- 10 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pelikan</span>
+        <span class="product-code">#PLK-SIV</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 55 75" width="45" height="60"><rect x="15" y="25" width="25" height="40" rx="3" fill="#1E293B"/><rect x="22" y="12" width="11" height="15" fill="#FFFFFF"/><text x="27" y="50" font-size="6" font-weight="800" fill="#FFFFFF" text-anchor="middle">DAKSİL</text></svg>
+        </div>
+        <div class="product-name">Pelikan Sıvı Şişe Daksil (Fırçalı - 20 ml)</div>
+        <div class="product-spec">Geniş Alan Hata Düzeltme • Yoğun Kapatıcı Formül</div>
+        <div class="product-order-box"><span>10'lu Paket</span><span>KOD: 410</span></div>
+      </div>
+      <!-- 11 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-DISP</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 70" width="65" height="55"><rect x="20" y="25" width="40" height="35" rx="3" fill="#DC2626"/><circle cx="50" cy="25" r="14" fill="#F59E0B"/></svg>
+        </div>
+        <div class="product-name">Mas Metal Gövdeli Koli Bandı Kesme Aparatı</div>
+        <div class="product-spec">Ergonomik Tabanca Saplı • Hızlı ve Güvenli Koli Kapatma</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 411</span></div>
+      </div>
+      <!-- 12 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Ve-Ge</span>
+        <span class="product-code">#VG-MSK</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 75" width="60" height="60"><circle cx="37" cy="37" r="28" fill="#FDE68A"/><circle cx="37" cy="37" r="14" fill="#FFFFFF"/><text x="37" y="41" font-size="6" font-weight="800" fill="#78350F" text-anchor="middle">MASKELEME</text></svg>
+        </div>
+        <div class="product-name">Ve-Ge Kağıt Maskeleme Bandı (50 mm)</div>
+        <div class="product-spec">İz Bırakmadan Çıkar • Boya, Paketleme ve Etiketleme</div>
+        <div class="product-order-box"><span>24'lü Koli</span><span>KOD: 412</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div><strong>Güncel Büro Makinaları & Kırtasiye</strong> • Balgat / Çankaya / Ankara</div>
+      <div class="page-footer-wa">💬 WhatsApp Sipariş: 0507 120 16 43</div>
+      <div>Sayfa 5</div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 6: KALEM & YAZI ARAÇLARI
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-cat-badge">BÖLÜM 05</span>
+        <h2 class="page-cat-title">Yazı Araçları & Kalem Grubu</h2>
+      </div>
+      <div class="page-header-logo">
+        <img src="logo.PNG" alt="Güncel">
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <!-- 1 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Faber-Castell</span>
+        <span class="product-code">#FC-1423</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="16" width="65" height="8" rx="2" fill="#0284C7"/><polygon points="75,16 85,20 75,24" fill="#CBD5E1"/><text x="40" y="23" font-size="6" font-weight="900" fill="#FFFFFF" text-anchor="middle">FABER 1423</text></svg>
+        </div>
+        <div class="product-name">Faber-Castell 1423 Tükenmez Kalem (50'li Kutu)</div>
+        <div class="product-spec">Mavi & Siyah • Kesintisiz Yağ Bazlı Mürekkep • 0.7 mm</div>
+        <div class="product-order-box"><span>50'li Kutu</span><span>KOD: 501</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Bic</span>
+        <span class="product-code">#BIC-RND</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="16" width="65" height="8" rx="2" fill="#E2E8F0"/><rect x="10" y="14" width="15" height="12" fill="#2563EB"/><text x="45" y="23" font-size="6" font-weight="900" fill="#1E293B" text-anchor="middle">BIC STIC</text></svg>
+        </div>
+        <div class="product-name">Bic Round Stic Ekonomik Ofis Kalemi (60'lı)</div>
+        <div class="product-spec">Mavi / Siyah / Kırmızı • Şirketlerin 1 Numaralı Ofis Kalemi</div>
+        <div class="product-order-box"><span>60'lı Kutu</span><span>KOD: 502</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Uni-ball</span>
+        <span class="product-code">#UNI-EYE</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="15" width="65" height="10" rx="3" fill="#0F172A"/><text x="42" y="23" font-size="6" font-weight="900" fill="#F59E0B" text-anchor="middle">UNI-BALL EYE</text></svg>
+        </div>
+        <div class="product-name">Uni-ball UB-150 Eye Sıvı Mürekkepli İmza Kalemi</div>
+        <div class="product-spec">0.5 mm & 0.7 mm • Suya Dayanıklı Belge İmzası Kalemi</div>
+        <div class="product-order-box"><span>12'li Kutu</span><span>KOD: 503</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Faber-Castell</span>
+        <span class="product-code">#FC-FOS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 50" width="70" height="40"><rect x="15" y="18" width="55" height="16" rx="4" fill="#84CC16"/><text x="42" y="29" font-size="7" font-weight="900" fill="#365314" text-anchor="middle">TEXTLINER</text></svg>
+        </div>
+        <div class="product-name">Faber-Castell 1548 Textliner Fosforlu Kalem</div>
+        <div class="product-spec">Sarı, Yeşil, Pembe, Turuncu • Yeniden Doldurulabilir</div>
+        <div class="product-order-box"><span>10'lu Kutu</span><span>KOD: 504</span></div>
+      </div>
+      <!-- 5 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Schneider</span>
+        <span class="product-code">#SCH-SLD</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="16" width="65" height="8" rx="2" fill="#1E3A8A"/><text x="42" y="23" font-size="6" font-weight="800" fill="#FFFFFF" text-anchor="middle">SLIDER BASIC</text></svg>
+        </div>
+        <div class="product-name">Schneider Slider Basic Viscoglide Yağlı Kalem</div>
+        <div class="product-spec">Ultra Kaygan Yazım • Hızlı Kuruyan Belge Mürekkebi</div>
+        <div class="product-order-box"><span>10'lu Kutu</span><span>KOD: 505</span></div>
+      </div>
+      <!-- 6 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Edding</span>
+        <span class="product-code">#EDD-360</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 45" width="75" height="38"><rect x="10" y="15" width="65" height="14" rx="4" fill="#FFFFFF" stroke="#000"/><text x="42" y="25" font-size="6.5" font-weight="900" fill="#DC2626" text-anchor="middle">edding 360</text></svg>
+        </div>
+        <div class="product-name">Edding 360 Beyaz Yazı Tahtası Kalemi</div>
+        <div class="product-spec">Kolay Silinir • Kokusuz • Siyah, Mavi, Kırmızı, Yeşil</div>
+        <div class="product-order-box"><span>10'lu Kutu</span><span>KOD: 506</span></div>
+      </div>
+      <!-- 7 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Edding</span>
+        <span class="product-code">#EDD-SIL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 50" width="70" height="40"><rect x="15" y="15" width="55" height="22" rx="4" fill="#1E293B"/><rect x="20" y="20" width="45" height="12" fill="#E2E8F0"/></svg>
+        </div>
+        <div class="product-name">Edding Manyetik Keçeli Tahta Silgisi</div>
+        <div class="product-spec">Tahtaya Yapışır • Çift Taraflı Keçe • İz Bırakmaz</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 507</span></div>
+      </div>
+      <!-- 8 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Edding</span>
+        <span class="product-code">#EDD-PER</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="15" width="65" height="12" rx="3" fill="#000000"/><text x="42" y="24" font-size="6" font-weight="900" fill="#FFFFFF" text-anchor="middle">edding 300</text></svg>
+        </div>
+        <div class="product-name">Edding 300 Permanent Koli & CD Kalemi</div>
+        <div class="product-spec">Çıkmayan Kalem • Metal, Plastik, Koli Üzerine Yazım</div>
+        <div class="product-order-box"><span>10'lu Kutu</span><span>KOD: 508</span></div>
+      </div>
+      <!-- 9 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Scrikss</span>
+        <span class="product-code">#SCR-TRI</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="16" width="65" height="8" rx="2" fill="#047857"/><text x="42" y="23" font-size="6" font-weight="900" fill="#FFFFFF" text-anchor="middle">SCRIKSS TRIO</text></svg>
+        </div>
+        <div class="product-name">Scrikss Trio Çok Renkli Ofis Tükenmez Kalem</div>
+        <div class="product-spec">Tek Gövdede Mavi, Siyah, Kırmızı • Pratik Mekanizma</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 509</span></div>
+      </div>
+      <!-- 10 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Faber-Castell</span>
+        <span class="product-code">#FC-VER</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 90 40" width="75" height="35"><rect x="10" y="16" width="65" height="8" rx="2" fill="#991B1B"/><text x="42" y="23" font-size="6" font-weight="900" fill="#FFFFFF" text-anchor="middle">GRIP 0.7</text></svg>
+        </div>
+        <div class="product-name">Faber-Castell Grip 1347 Versatil Kalem (0.7 mm)</div>
+        <div class="product-spec">Noktalı Ergonomik Kavrama • Gizlenebilir Uç Mekanizması</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 510</span></div>
+      </div>
+      <!-- 11 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pentel</span>
+        <span class="product-code">#PNT-UC</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 45" width="60" height="35"><rect x="15" y="10" width="45" height="25" rx="2" fill="#1E293B"/><text x="37" y="26" font-size="6" font-weight="900" fill="#E2E8F0" text-anchor="middle">0.7 mm 2B</text></svg>
+        </div>
+        <div class="product-name">Pentel Ain Stein Kırılmayan Kalem Ucu (0.7 mm)</div>
+        <div class="product-spec">2B Koyu Yumuşak • 40 Adet Uç • Kırılmaya Dirençli</div>
+        <div class="product-order-box"><span>12'li Paket</span><span>KOD: 511</span></div>
+      </div>
+      <!-- 12 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Faber-Castell</span>
+        <span class="product-code">#FC-SLG</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 50" width="55" height="40"><rect x="15" y="12" width="40" height="26" rx="2" fill="#FFFFFF" stroke="#000"/><text x="35" y="28" font-size="6.5" font-weight="900" fill="#047857" text-anchor="middle">DUST-FREE</text></svg>
+        </div>
+        <div class="product-name">Faber-Castell Dust-Free Beyaz Silgi (Büyük)</div>
+        <div class="product-spec">Tortu Bırakmaz • Leke Yapmaz • 20'li Kutu</div>
+        <div class="product-order-box"><span>20'li Kutu</span><span>KOD: 512</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div><strong>Güncel Büro Makinaları & Kırtasiye</strong> • Balgat / Çankaya / Ankara</div>
+      <div class="page-footer-wa">💬 WhatsApp Sipariş: 0507 120 16 43</div>
+      <div>Sayfa 6</div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 7: DEFTER, BLOKNOT & OFİS SARF
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-cat-badge">BÖLÜM 06</span>
+        <h2 class="page-cat-title">Defter, Notluk & Ofis Tüketim</h2>
+      </div>
+      <div class="page-header-logo">
+        <img src="logo.PNG" alt="Güncel">
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <!-- 1 -->
+      <div class="product-card">
+        <span class="product-brand-tag">3M Post-it</span>
+        <span class="product-code">#3M-PST</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 70 70" width="55" height="55"><rect x="15" y="15" width="40" height="40" rx="3" fill="#FEF08A" stroke="#EAB308"/><text x="35" y="38" font-size="7" font-weight="900" fill="#713F12" text-anchor="middle">Post-it</text></svg>
+        </div>
+        <div class="product-name">3M Orijinal Sarı Yapışkanlı Not Kağıdı (76x76 mm)</div>
+        <div class="product-spec">100 Yaprak • İz Bırakmadan Tekrar Yapışır • 12'li Paket</div>
+        <div class="product-order-box"><span>12'li Paket</span><span>KOD: 601</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="product-card">
+        <span class="product-brand-tag">3M Post-it</span>
+        <span class="product-code">#3M-IND</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 50" width="65" height="40"><rect x="10" y="15" width="12" height="22" fill="#EF4444"/><rect x="25" y="15" width="12" height="22" fill="#F59E0B"/><rect x="40" y="15" width="12" height="22" fill="#10B981"/><rect x="55" y="15" width="12" height="22" fill="#3B82F6"/></svg>
+        </div>
+        <div class="product-name">3M Sayfa İşaretleyici Şerit İndeks (Post-it Index)</div>
+        <div class="product-spec">Evrak & Sözleşme İmzalatma / Sayfa Belirteçleri (4 Renk)</div>
+        <div class="product-order-box"><span>4'lü Set</span><span>KOD: 602</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-DEF</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 75 90" width="55" height="70"><rect x="15" y="10" width="50" height="70" rx="3" fill="#1E293B"/><circle cx="15" cy="20" r="2" fill="#CBD5E1"/><circle cx="15" cy="30" r="2" fill="#CBD5E1"/><circle cx="15" cy="40" r="2" fill="#CBD5E1"/><text x="40" y="48" font-size="7" font-weight="800" fill="#F8FAFC" text-anchor="middle">SPİRALLİ A4</text></svg>
+        </div>
+        <div class="product-name">Gıpta Sert Kapak Spiralli Toplantı Defteri (A4)</div>
+        <div class="product-spec">Kareli / Çizgili • 100 Yaprak • Kaliteli Hamur</div>
+        <div class="product-order-box"><span>5'li Paket</span><span>KOD: 603</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-A5</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 65 80" width="50" height="65"><rect x="12" y="10" width="42" height="62" rx="3" fill="#047857"/><text x="33" y="44" font-size="6.5" font-weight="800" fill="#ECFDF5" text-anchor="middle">A5 DEFTER</text></svg>
+        </div>
+        <div class="product-name">Gıpta Lastikli Çizgili A5 Yönetici Not Defteri</div>
+        <div class="product-spec">Deri Dokulu Termo Deri Kapak • Kalem Tutuculu</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 604</span></div>
+      </div>
+      <!-- 5 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pelikan</span>
+        <span class="product-code">#PLK-IST</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 60" width="65" height="50"><rect x="15" y="15" width="50" height="30" rx="4" fill="#334155"/><rect x="20" y="20" width="40" height="20" fill="#1E3A8A"/></svg>
+        </div>
+        <div class="product-name">Pelikan Otomatik Kaşe Istampası (Mavi/Siyah)</div>
+        <div class="product-spec">Metal Kutulu • Yoğun Mürekkepli Kaşe Yastığı</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 605</span></div>
+      </div>
+      <!-- 6 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Pelikan</span>
+        <span class="product-code">#PLK-MUR</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 50 75" width="40" height="60"><rect x="15" y="25" width="20" height="35" rx="3" fill="#1E3A8A"/><rect x="20" y="12" width="10" height="13" fill="#FFFFFF"/></svg>
+        </div>
+        <div class="product-name">Pelikan Otomatik Kaşe Mürekkebi (30 ml)</div>
+        <div class="product-spec">Damlalıklı Şişe • Dağılma Yapmaz • Mavi / Siyah</div>
+        <div class="product-order-box"><span>1 Adet</span><span>KOD: 606</span></div>
+      </div>
+      <!-- 7 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Ofisline</span>
+        <span class="product-code">#OFS-BRD</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 65 75" width="50" height="60"><polygon points="15,15 50,15 42,65 23,65" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/><text x="32" y="44" font-size="7" font-weight="900" fill="#DC2626" text-anchor="middle">7 oz</text></svg>
+        </div>
+        <div class="product-name">7 oz Karton Su & Çay Bardağı (Koli İçi 3000 Adet)</div>
+        <div class="product-spec">Sızdırmaz Kaliteli Taban • Şirket İçi Tüketim İçin İdeal</div>
+        <div class="product-order-box"><span>Koli (3000'li)</span><span>KOD: 607</span></div>
+      </div>
+      <!-- 8 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Selpak</span>
+        <span class="product-code">#SLP-HVL</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 65 80" width="50" height="60"><rect x="18" y="12" width="30" height="56" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="2"/><text x="33" y="44" font-size="6" font-weight="800" fill="#0284C7" text-anchor="middle">HAVLU</text></svg>
+        </div>
+        <div class="product-name">Selpak Professional Rulo Havlu Kağıt</div>
+        <div class="product-spec">Çift Katlı • Emici Doku • Paket İçi 6 Rulo</div>
+        <div class="product-order-box"><span>6'lı Paket</span><span>KOD: 608</span></div>
+      </div>
+      <!-- 9 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Koroplast</span>
+        <span class="product-code">#KRP-COP</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 80 50" width="65" height="40"><rect x="15" y="15" width="50" height="20" rx="3" fill="#1E293B"/><text x="40" y="28" font-size="7" font-weight="800" fill="#38BDF8" text-anchor="middle">BÜYÜK BOY</text></svg>
+        </div>
+        <div class="product-name">Büyük Boy Endüstriyel Çöp Torbası (10'lu)</div>
+        <div class="product-spec">Yırtılmaz Kalın Doku • 65x80 cm • Ofis ve Kat Temizliği</div>
+        <div class="product-order-box"><span>10 Rulo Koli</span><span>KOD: 609</span></div>
+      </div>
+      <!-- 10 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-THS</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 60" width="70" height="50"><rect x="10" y="12" width="65" height="36" rx="2" fill="#FEF3C7" stroke="#D97706"/><text x="42" y="32" font-size="7" font-weight="900" fill="#92400E" text-anchor="middle">TAHSİLAT MAKBUZU</text></svg>
+        </div>
+        <div class="product-name">Otocopy Tahsilat / Tediye Makbuzu (Cilt)</div>
+        <div class="product-spec">Kendinden Karbonlu 2 Nüsha • 50 Sayfa/Cilt</div>
+        <div class="product-order-box"><span>1 Cilt</span><span>KOD: 610</span></div>
+      </div>
+      <!-- 11 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Mas</span>
+        <span class="product-code">#MAS-RAP</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 60 60" width="50" height="50"><circle cx="30" cy="30" r="20" fill="#EF4444"/><circle cx="30" cy="30" r="4" fill="#FFFFFF"/></svg>
+        </div>
+        <div class="product-name">Mas Renkli Harita Çivisi / Pano İğnesi (Puspin)</div>
+        <div class="product-spec">Mantar Pano İçin • Plastik Başlıklı Çelik Çivi (50'li)</div>
+        <div class="product-order-box"><span>50'li Kutu</span><span>KOD: 611</span></div>
+      </div>
+      <!-- 12 -->
+      <div class="product-card">
+        <span class="product-brand-tag">Gıpta</span>
+        <span class="product-code">#GPT-ZRF</span>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 85 55" width="70" height="45"><rect x="10" y="10" width="65" height="35" rx="2" fill="#FFFFFF" stroke="#94A3B8"/><polygon points="10,10 42,30 75,10" fill="#E2E8F0"/></svg>
+        </div>
+        <div class="product-name">Diplomat Zarf (Pencereli & Penceresiz - 100'lü)</div>
+        <div class="product-spec">Silikonlu Kendinden Yapışkanlı Kapak • Resmi Yazışma</div>
+        <div class="product-order-box"><span>100'lü Paket</span><span>KOD: 612</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div><strong>Güncel Büro Makinaları & Kırtasiye</strong> • Balgat / Çankaya / Ankara</div>
+      <div class="page-footer-wa">💬 WhatsApp Sipariş: 0507 120 16 43</div>
+      <div>Sayfa 7</div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SAYFA 8: ARKA KAPAK
+       ========================================== -->
+  <div class="page back-cover">
+    <div>
+      <div class="back-top-logo">
+        <img src="logo.PNG" alt="Güncel Büro Makineleri & Kırtasiye">
+      </div>
+
+      <div class="back-order-card">
+        <h3>Nasıl Sipariş Verebilirsiniz?</h3>
+        <p>
+          İhtiyacınız olan ürünleri veya elinizdeki malzeme listesini fotoğraf, mesaj ya da Excel dosyası olarak bize iletin; şirket iskontonuzla anında fiyatlandıralım.
+        </p>
+        <a href="https://wa.me/905071201643" class="back-wa-pill">
+          <span>💬</span> WhatsApp: 0507 120 16 43
+        </a>
+      </div>
+
+      <div class="back-contact-grid">
+        <div class="back-contact-box">
+          <h4>📍 Dükkan Adresimiz</h4>
+          <p>
+            <strong>Osmanlı Caddesi No: 30/B</strong><br>
+            Nasuh Akar Mahallesi<br>
+            Balgat, Çankaya / Ankara<br>
+            <span style="font-size:8pt; color:#94A3B8;">(Milli Kütüphane & Konya Yolu Yakını)</span>
+          </p>
+        </div>
+
+        <div class="back-contact-box">
+          <h4>📞 İletişim & Sipariş</h4>
+          <p>
+            <strong>Telefon / WhatsApp:</strong> 0507 120 16 43<br>
+            <strong>Sabit Hat:</strong> 0312 220 32 32<br>
+            <strong>E-Posta:</strong> guncel.kirtasiye@hotmail.com<br>
+            <strong>Web:</strong> www.guncelkirtasiye.com
+          </p>
+        </div>
+
+        <div class="back-contact-box">
+          <h4>🚚 Teslimat Koşulları</h4>
+          <p>
+            • <strong>Balgat içi aynı gün adrese teslim</strong><br>
+            • Belirli tutar üzeri siparişlerde ücretsiz kurye servisi<br>
+            • Kurumsal e-fatura & cari hesap imkanı
+          </p>
+        </div>
+
+        <div class="back-contact-box">
+          <h4>⏰ Çalışma Saatleri</h4>
+          <p>
+            • <strong>Hafta İçi:</strong> 08:30 – 18:30<br>
+            • <strong>Cumartesi:</strong> 09:00 – 17:00<br>
+            • <strong>Pazar:</strong> Kapalı
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-footer-note">
+      30 Yıllık Kurumsal Güven • Güncel Büro Makineleri Kırtasiye ve Bilgisayar • Ankara / Balgat
+    </div>
+  </div>
+
+</body>
+</html>
